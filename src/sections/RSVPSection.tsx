@@ -9,6 +9,7 @@ export const RSVPSection: React.FC = () => {
   const { rsvp, club } = eventConfig;
 
   const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
   const [attendance, setAttendance] = useState<AttendanceStatus>('yes');
   const [guestCount, setGuestCount] = useState<number>(1);
   const [note, setNote] = useState('');
@@ -44,6 +45,7 @@ export const RSVPSection: React.FC = () => {
 
     const payload = {
       fullName: fullName.trim(),
+      phone: phone.trim(),
       attendance,
       attendanceText: attendanceLabelMap[attendance],
       guestCount: attendance === 'no' ? 0 : guestCount,
@@ -90,6 +92,7 @@ export const RSVPSection: React.FC = () => {
   const handleReset = () => {
     setIsSubmitted(false);
     setFullName('');
+    setPhone('');
     setAttendance('yes');
     setGuestCount(1);
     setNote('');
@@ -178,6 +181,20 @@ export const RSVPSection: React.FC = () => {
                 />
               </div>
 
+              {/* Số điện thoại liên hệ (nằm ngay dưới Tên) */}
+              <div>
+                <label className="block text-xs sm:text-sm font-bold text-[#0c4a6e] font-display mb-2">
+                  Số điện thoại liên hệ <span className="text-slate-400 text-xs font-normal font-body">(Không bắt buộc)</span>
+                </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Nhập SĐT hoặc Zalo để BTC liên hệ đón tiếp"
+                  className="w-full px-4 py-3 rounded-2xl bg-white border border-[#0284c7]/18 text-[#0c4a6e] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-2 focus:ring-[#88cef4]/50 text-sm transition-all"
+                />
+              </div>
+
               {/* 3 Trạng thái tham dự */}
               <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
                 {(
@@ -244,13 +261,13 @@ export const RSVPSection: React.FC = () => {
                 </div>
               )}
 
-              {/* SĐT hoặc lời nhắn gọn (không bắt buộc) */}
+              {/* Lời nhắn gửi CLB (không bắt buộc) */}
               <div>
                 <input
                   type="text"
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  placeholder="SĐT liên hệ hoặc lời chúc gửi CLB (không bắt buộc)"
+                  placeholder="Lời nhắn hoặc lời chúc gửi CLB (không bắt buộc)"
                   className="w-full px-4 py-2.5 rounded-2xl bg-[#f8fcff] border border-[#0284c7]/15 text-[#0c4a6e] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-2 focus:ring-[#88cef4]/40 text-xs sm:text-sm transition-all"
                 />
               </div>

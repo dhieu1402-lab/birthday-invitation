@@ -161,6 +161,7 @@ Mặc định website hoạt động ở chế độ Demo UI và lưu trữ tạ
        data.fullName,
        data.phone,
        data.attendanceText,
+       data.guestCount,
        data.message
      ]);
      return ContentService.createTextOutput(JSON.stringify({ status: "success" }))
