@@ -104,11 +104,13 @@ club: {
 event: {
   title: "LỄ KỶ NIỆM SINH NHẬT CLB KỸ SƯ KINH TẾ",
   theme: "Dấu Ấn Tự Hào – Vững Bước Vươn Xa",
-  editionText: "SINH NHẬT KỶ NIỆM 15 NĂM",
-  dateDisplay: "Thứ Bảy, 25/12/2026",
+  editionLine1: "SINH NHẬT",
+  editionLine2: "KỶ NIỆM 18 NĂM",
+  dateDisplay: "Thứ Bảy, 12/12/2026",
+  startTime: "18:00",
   timeDisplay: "18:00 - 21:30 (Đón khách từ 17:30)",
   // Thời điểm đếm ngược (định dạng ISO, múi giờ UTC+7):
-  targetDateTime: "2026-12-25T18:00:00+07:00",
+  targetDateTime: "2026-12-12T18:00:00+07:00",
   venue: "Hội trường G3 - Trường Đại học Xây dựng Hà Nội (HUCE)",
   address: "Số 55 Giải Phóng, Phường Đồng Tâm, Quận Hai Bà Trưng, TP. Hà Nội",
   googleMapsUrl: "https://maps.google.com/?q=...",
