@@ -52,7 +52,7 @@ export interface EventConfig {
     title: string;
     theme: string;
     editionLine1: string; // Dòng 1: VD "SINH NHẬT"
-    editionLine2: string; // Dòng 2: VD "KỶ NIỆM 15 NĂM"
+    editionLine2: string; // Dòng 2: VD "KỶ NIỆM 18 NĂM"
     dateDisplay: string;
     startTime: string; // Giờ bắt đầu chính thức để nhắc khách mời
     timeDisplay: string;
@@ -101,7 +101,7 @@ export const eventConfig: EventConfig = {
     shortName: "CEM - EEC",
     slogan: "Cùng nhau học hỏi", // Để "" nếu muốn ẩn hoàn toàn khẩu hiệu
     logo: "./images/logo.png",
-    establishedYear: 2011,
+    establishedYear: 2008,
     organizer: "Ban Chủ Nhiệm CLB Kỹ Sư Kinh Tế (CEM - EEC)",
   },
 
@@ -109,11 +109,11 @@ export const eventConfig: EventConfig = {
     title: "LỄ KỶ NIỆM SINH NHẬT CLB KỸ SƯ KINH TẾ",
     theme: "Dấu Ấn Tự Hào – Vững Bước Vươn Xa",
     editionLine1: "SINH NHẬT",
-    editionLine2: "KỶ NIỆM 15 NĂM",
-    dateDisplay: "Thứ Bảy, 25/12/2026",
+    editionLine2: "KỶ NIỆM 18 NĂM",
+    dateDisplay: "Thứ Bảy, 12/12/2026",
     startTime: "18:00",
     timeDisplay: "18:00 – 21:30 (Đón khách từ 17:30)",
-    targetDateTime: "2026-12-25T18:00:00+07:00",
+    targetDateTime: "2026-12-12T18:00:00+07:00",
     venue: "Hội trường G3 – Trường Đại học Xây dựng Hà Nội",
     address: "Số 55 Giải Phóng, Phường Đồng Tâm, Quận Hai Bà Trưng, TP. Hà Nội",
     googleMapsUrl: "https://maps.google.com/?q=Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+X%C3%A2y+d%E1%BB%B1ng+H%C3%A0+N%E1%BB%99i+55+Gi%E1%BA%A3i+Ph%C3%B3ng",
@@ -127,16 +127,16 @@ export const eventConfig: EventConfig = {
       {
         time: "18:00 – 18:30",
         title: "Khai mạc & Đại diện Khoa phát biểu",
-        description: "Nhìn lại chặng đường 15 năm, lắng nghe lời chúc mừng từ Đại diện Khoa Kinh tế & Quản lý Xây dựng cùng Ban Chủ Nhiệm.",
+        description: "Nhìn lại chặng đường 18 năm, lắng nghe lời chúc mừng từ Đại diện Khoa Kinh tế & Quản lý Xây dựng cùng Ban Chủ Nhiệm.",
       },
       {
         time: "18:30 – 19:15",
-        title: "Nghi thức Sinh nhật & Giao lưu các thế hệ",
+        title: "Nghi thức Sinh nhật và giao lưu các thế hệ",
         description: "Thổi nến cắt bánh mừng sinh nhật CLB, tri ân các thế hệ đi trước và chia sẻ câu chuyện gắn kết.",
       },
       {
         time: "19:15 – 21:30",
-        title: "Tiết mục văn nghệ & Tiệc liên hoan",
+        title: "Tiết mục văn nghệ và tiệc liên hoan",
         description: "Thưởng thức các tiết mục văn nghệ đặc sắc, trò chơi giao lưu và dùng tiệc ấm cúng cùng đại gia đình CEM - EEC.",
       },
     ],

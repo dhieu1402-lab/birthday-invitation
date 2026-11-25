@@ -44,16 +44,16 @@ export const InvitationSection: React.FC = () => {
             {club.name} ({club.shortName})
           </h3>
 
-          {/* Pure Vietnamese Headline */}
-          <h2 className="text-3xl sm:text-5xl font-bold text-[#0c4a6e] tracking-tight font-display mb-3">
-            {invitation.headline}
-          </h2>
-
           {/* Edition on 2 balanced lines */}
-          <h4 className="text-base sm:text-xl font-bold text-[#0284c7] font-display tracking-wide mb-6 leading-snug">
+          <h4 className="text-base sm:text-xl font-bold text-[#0284c7] font-display tracking-wide mb-3 leading-snug">
             <span className="block">{event.editionLine1}</span>
             <span className="block">{event.editionLine2}</span>
           </h4>
+
+          {/* Pure Vietnamese Headline */}
+          <h2 className="text-3xl sm:text-5xl font-bold text-[#0c4a6e] tracking-tight font-display mb-6">
+            {invitation.headline}
+          </h2>
 
           <div className="w-24 h-1 bg-gradient-to-r from-[#88cef4] via-[#0284c7] to-[#88cef4] rounded-full mx-auto mb-7"></div>
 

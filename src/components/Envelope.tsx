@@ -10,6 +10,7 @@ interface EnvelopeProps {
 export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
   const [isOpenAnimation, setIsOpenAnimation] = useState(false);
   const { club, event } = eventConfig;
+  const sealEditionLabel = event.editionLine2.match(/\d+\s*năm/i)?.[0]?.toLowerCase() ?? '18 năm';
 
   const handleOpenClick = () => {
     if (isOpenAnimation) return;
@@ -150,7 +151,7 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
                 <div className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full sn2-gold-seal p-1 pulse-glow cursor-pointer">
                   <div className="w-full h-full rounded-full border border-[#fff]/55 flex flex-col items-center justify-center font-display">
                     <span className="text-[10px] font-bold text-[#6b4708] tracking-wider">EEC</span>
-                    <span className="text-xs font-bold text-[#5c3a06]">15 năm</span>
+                    <span className="text-xs font-bold text-[#5c3a06]">{sealEditionLabel}</span>
                   </div>
                 </div>
               </div>
