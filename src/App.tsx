@@ -18,9 +18,9 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col font-sans selection:bg-amber-400/30 selection:text-amber-200">
-      {/* Background Subtle Stars / Noise */}
-      <div className="fixed inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-25 pointer-events-none"></div>
+    <div className="min-h-screen bg-gradient-to-b from-[#f0f9ff] via-[#e0f2fe] to-[#f0f9ff] text-[#0c4a6e] flex flex-col font-body selection:bg-[#88cef4]/40 selection:text-[#041f3d]">
+      {/* Subtle Sky-Blue Pattern */}
+      <div className="fixed inset-0 bg-[radial-gradient(#7dd3fc_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none"></div>
 
       {/* Persistent Floating Controls */}
       <MusicControl isOpened={isOpened} />

@@ -16,21 +16,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened, onOpen }) =>
   }
 
   return (
-    <section className="relative min-h-[85vh] sm:min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 pb-16 overflow-hidden">
-      {/* Background ambient radial gradients */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-gradient-to-tr from-sky-500/15 via-amber-500/15 to-purple-500/15 rounded-full blur-3xl pointer-events-none"></div>
+    <section className="relative min-h-[85vh] sm:min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 pb-20 overflow-hidden sn2-hero-bg">
+      {/* Background ambient sky-blue glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] sm:w-[650px] h-[360px] sm:h-[650px] bg-gradient-to-tr from-[#38bdf8]/25 via-[#88cef4]/15 to-[#f5c542]/10 rounded-full blur-3xl pointer-events-none"></div>
 
       {/* Floating Sparkles */}
-      <div className="absolute top-16 left-8 animate-float-slow text-amber-300 opacity-60">
+      <div className="absolute top-16 left-8 animate-float-slow text-[#f5c542] opacity-80">
         <Sparkles className="w-6 h-6" />
       </div>
-      <div className="absolute top-32 right-10 animate-float-slow text-sky-300 opacity-60" style={{ animationDelay: '1.5s' }}>
+      <div className="absolute top-32 right-10 animate-float-slow text-[#88cef4] opacity-80" style={{ animationDelay: '1.5s' }}>
         <Sparkles className="w-7 h-7" />
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center animate-fade-in">
         {/* Club Logo */}
-        <div className="relative mb-6 p-4 rounded-3xl bg-slate-900/60 border border-slate-700/60 backdrop-blur-xl shadow-2xl">
+        <div className="relative mb-6 p-3.5 rounded-3xl bg-white/95 border border-white/70 backdrop-blur-xl shadow-[0_16px_40px_rgba(4,31,61,0.35)]">
           <img
             src={club.logo}
             alt={club.name}
@@ -39,34 +39,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened, onOpen }) =>
         </div>
 
         {/* Top Tagline */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-widest uppercase bg-amber-500/10 border border-amber-500/30 text-amber-300 mb-4 shadow-lg shadow-amber-500/5">
-          <Sparkles className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-white/15 border border-white/30 text-[#e0f7ff] mb-4 shadow-lg font-alt backdrop-blur-md">
+          <Sparkles className="w-3.5 h-3.5 text-[#f5c542]" />
           {event.editionText}
         </div>
 
         {/* Club Name */}
-        <h2 className="text-sm sm:text-base tracking-[0.25em] font-bold text-slate-300 uppercase mb-2">
+        <h2 className="text-sm sm:text-base tracking-[0.22em] font-bold text-[#bae6fd] uppercase mb-2 font-alt">
           {club.name}
         </h2>
 
         {/* Main Event Title */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-amber-300 tracking-tight font-['Playfair_Display'] mb-4 leading-tight">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight font-display mb-4 leading-tight drop-shadow-[3px_4px_0_rgba(1,54,98,0.45)]">
           {event.title}
         </h1>
 
         {/* Theme */}
-        <p className="text-base sm:text-xl font-medium text-amber-300/90 italic font-['Dancing_Script'] mb-8">
+        <p className="text-xl sm:text-2xl font-bold text-[#7dd3fc] font-script mb-8 drop-shadow-sm">
           "{event.theme}"
         </p>
 
         {/* Quick Date and Venue badges */}
-        <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm text-slate-300 mb-10">
-          <span className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 backdrop-blur-md">
-            <Calendar className="w-4 h-4 text-amber-400" />
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm text-white mb-10 font-alt">
+          <span className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#041f3d]/45 border border-white/25 backdrop-blur-md shadow">
+            <Calendar className="w-4 h-4 text-[#f5c542]" />
             {event.dateDisplay}
           </span>
-          <span className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 backdrop-blur-md">
-            <MapPin className="w-4 h-4 text-sky-400" />
+          <span className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#041f3d]/45 border border-white/25 backdrop-blur-md shadow">
+            <MapPin className="w-4 h-4 text-[#7dd3fc]" />
             {event.venue}
           </span>
         </div>
@@ -74,11 +74,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened, onOpen }) =>
         {/* Scroll indicator */}
         <a
           href="#invitation"
-          className="group inline-flex flex-col items-center gap-2 text-xs text-slate-400 hover:text-amber-300 transition-colors"
+          className="group inline-flex flex-col items-center gap-2 text-xs font-semibold font-alt text-white/90 hover:text-white transition-colors"
         >
-          <span>Khám phá thiệp mời</span>
-          <div className="p-2 rounded-full bg-slate-900 border border-slate-800 group-hover:border-amber-400/50 group-hover:bg-slate-800 transition-all animate-bounce">
-            <ChevronDown className="w-4 h-4 text-amber-400" />
+          <span className="drop-shadow-sm">Khám phá thiệp mời</span>
+          <div className="p-2.5 rounded-full bg-white text-[#0284c7] shadow-lg group-hover:scale-105 transition-all animate-bounce">
+            <ChevronDown className="w-4 h-4" />
           </div>
         </a>
       </div>

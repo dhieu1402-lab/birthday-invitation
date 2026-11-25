@@ -45,25 +45,31 @@ export const QRPayment: React.FC = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-12">
-      <div className="relative glass-card rounded-3xl p-6 sm:p-10 border-amber-500/30 shadow-2xl backdrop-blur-2xl overflow-hidden">
-        {/* Subtle decorative background gradient circles */}
-        <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="relative sn2-paper-card rounded-3xl p-6 sm:p-10 overflow-hidden">
+        {/* Corner Accents */}
+        <div className="absolute top-3 left-3 w-7 h-7 border-t-2 border-l-2 border-[#7dd3fc] rounded-tl-lg pointer-events-none"></div>
+        <div className="absolute top-3 right-3 w-7 h-7 border-t-2 border-r-2 border-[#7dd3fc] rounded-tr-lg pointer-events-none"></div>
+        <div className="absolute bottom-3 left-3 w-7 h-7 border-b-2 border-l-2 border-[#7dd3fc] rounded-bl-lg pointer-events-none"></div>
+        <div className="absolute bottom-3 right-3 w-7 h-7 border-b-2 border-r-2 border-[#7dd3fc] rounded-br-lg pointer-events-none"></div>
+
+        {/* Subtle decorative sky & gold glow */}
+        <div className="absolute -top-24 -right-24 w-72 h-72 bg-[#88cef4]/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#f5c542]/15 rounded-full blur-3xl pointer-events-none"></div>
 
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 relative z-10">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase text-amber-300 bg-amber-500/10 border border-amber-500/30 mb-3">
-            <HeartHandshake className="w-3.5 h-3.5 text-amber-400" />
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-alt mb-3">
+            <HeartHandshake className="w-3.5 h-3.5 text-[#0284c7]" />
             TẤM LÒNG & CHÚC PHÚC
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-amber-300 tracking-tight font-['Playfair_Display']">
+          <h2 className="text-2xl sm:text-4xl font-bold text-[#0c4a6e] tracking-tight font-display">
             A LITTLE GIFT, A LOT OF LOVE
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-rose-400 mx-auto mt-4 rounded-full"></div>
-          <p className="text-slate-300 text-sm sm:text-base mt-4 leading-relaxed font-light">
+          <div className="w-20 h-1 bg-gradient-to-r from-[#88cef4] to-[#0284c7] mx-auto mt-4 rounded-full"></div>
+          <p className="text-[#0369a1] text-sm sm:text-base mt-4 leading-relaxed">
             Nếu bạn muốn gửi một món quà nhỏ thay cho lời chúc đến CLB, chúng mình xin gửi thông tin bên dưới.
             <br />
-            <strong className="text-amber-300 font-medium">Sự hiện diện và tình cảm của bạn đã là món quà tuyệt vời nhất!</strong>
+            <strong className="text-[#0c4a6e] font-semibold">Sự hiện diện và tình cảm của bạn đã là món quà tuyệt vời nhất!</strong>
           </p>
         </div>
 
@@ -71,10 +77,10 @@ export const QRPayment: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
           {/* QR Code Column */}
           <div className="md:col-span-5 flex flex-col items-center">
-            <div className="relative group p-3.5 rounded-2xl bg-gradient-to-b from-amber-400/20 via-slate-800 to-slate-900 border border-amber-400/40 shadow-xl shadow-amber-500/5">
+            <div className="relative group p-3.5 rounded-2xl bg-gradient-to-b from-[#f0f9ff] to-white border-2 border-[#7dd3fc]/70 shadow-lg shadow-[#0284c7]/10">
               <div
                 onClick={() => setIsQrZoomed(true)}
-                className="cursor-pointer relative overflow-hidden rounded-xl bg-white p-2.5 max-w-[240px] sm:max-w-[260px]"
+                className="cursor-pointer relative overflow-hidden rounded-xl bg-white p-2 max-w-[240px] sm:max-w-[260px]"
                 title="Nhấn để phóng to mã QR"
               >
                 <img
@@ -82,33 +88,32 @@ export const QRPayment: React.FC = () => {
                   alt="QR Chuyển khoản mừng sinh nhật"
                   className="w-full h-auto object-contain rounded-lg transition-transform duration-300 group-hover:scale-102"
                   onError={(e) => {
-                    // Fallback to VietQR API if local path fails
                     (e.target as HTMLImageElement).src = vietQrDynamicUrl;
                   }}
                 />
                 {/* Zoom overlay hint */}
-                <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
-                  <span className="px-3 py-1.5 rounded-full bg-slate-900/90 text-amber-300 text-xs font-semibold flex items-center gap-1.5 shadow-lg">
-                    <Maximize2 className="w-3.5 h-3.5" /> Phóng to QR
+                <div className="absolute inset-0 bg-[#041f3d]/45 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
+                  <span className="px-3 py-1.5 rounded-full bg-white text-[#0c4a6e] text-xs font-bold font-alt flex items-center gap-1.5 shadow-lg">
+                    <Maximize2 className="w-3.5 h-3.5 text-[#0284c7]" /> Phóng to QR
                   </span>
                 </div>
               </div>
 
               {/* QR mode toggle (ảnh gốc vs VietQR) */}
-              <div className="w-full flex items-center justify-center gap-2 mt-3 pt-2 border-t border-slate-800 text-[11px]">
+              <div className="w-full flex items-center justify-center gap-2 mt-3 pt-2 border-t border-[#0284c7]/15 text-[11px] font-alt">
                 <button
                   onClick={() => setUseVietQrCode(false)}
-                  className={`px-2 py-1 rounded transition-colors ${
-                    !useVietQrCode ? 'bg-amber-500/30 text-amber-300 font-bold' : 'text-slate-400 hover:text-slate-300'
+                  className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+                    !useVietQrCode ? 'bg-[#0284c7] text-white font-bold' : 'text-[#0369a1] hover:bg-[#e0f2fe]'
                   }`}
                 >
                   Ảnh QR gốc
                 </button>
-                <span className="text-slate-600">|</span>
+                <span className="text-[#7dd3fc]">|</span>
                 <button
                   onClick={() => setUseVietQrCode(true)}
-                  className={`px-2 py-1 rounded transition-colors ${
-                    useVietQrCode ? 'bg-amber-500/30 text-amber-300 font-bold' : 'text-slate-400 hover:text-slate-300'
+                  className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+                    useVietQrCode ? 'bg-[#0284c7] text-white font-bold' : 'text-[#0369a1] hover:bg-[#e0f2fe]'
                   }`}
                 >
                   VietQR Tiêu chuẩn
@@ -119,9 +124,9 @@ export const QRPayment: React.FC = () => {
             {/* Save QR button */}
             <button
               onClick={handleDownloadQr}
-              className="mt-3.5 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 transition-all hover:border-amber-400 shadow-md"
+              className="mt-3.5 flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold font-alt bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0c4a6e] border border-[#0284c7]/25 transition-all shadow-sm cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5" />
+              <Download className="w-3.5 h-3.5 text-[#0284c7]" />
               LƯU ẢNH QR VỀ MÁY
             </button>
           </div>
@@ -129,41 +134,41 @@ export const QRPayment: React.FC = () => {
           {/* Account Information Details Column */}
           <div className="md:col-span-7 flex flex-col gap-3.5">
             {/* Bank Name */}
-            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
-              <span className="text-xs uppercase tracking-wider text-slate-400 flex items-center gap-1.5 mb-1 font-medium">
-                <CreditCard className="w-3.5 h-3.5 text-amber-400" />
+            <div className="p-3.5 rounded-xl bg-[#f0f9ff]/90 border border-[#0284c7]/15">
+              <span className="text-xs uppercase tracking-wider text-[#0369a1] flex items-center gap-1.5 mb-1 font-bold font-alt">
+                <CreditCard className="w-3.5 h-3.5 text-[#0284c7]" />
                 Ngân Hàng
               </span>
-              <p className="text-white font-bold text-base sm:text-lg">{bank.bankName}</p>
+              <p className="text-[#0c4a6e] font-bold text-base sm:text-lg">{bank.bankName}</p>
             </div>
 
             {/* Account Owner */}
-            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
-              <span className="text-xs uppercase tracking-wider text-slate-400 block mb-1 font-medium">
+            <div className="p-3.5 rounded-xl bg-[#f0f9ff]/90 border border-[#0284c7]/15">
+              <span className="text-xs uppercase tracking-wider text-[#0369a1] block mb-1 font-bold font-alt">
                 Chủ Tài Khoản
               </span>
-              <p className="text-amber-200 font-extrabold text-base sm:text-lg tracking-wider">
+              <p className="text-[#1f6fac] font-extrabold text-base sm:text-lg tracking-wider">
                 {bank.accountName}
               </p>
             </div>
 
             {/* Account Number with Copy Button */}
-            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-2">
+            <div className="p-3.5 rounded-xl bg-[#f0f9ff]/90 border border-[#0284c7]/15 flex items-center justify-between gap-2">
               <div className="overflow-hidden">
-                <span className="text-xs uppercase tracking-wider text-slate-400 block mb-1 font-medium">
+                <span className="text-xs uppercase tracking-wider text-[#0369a1] block mb-1 font-bold font-alt">
                   Số Tài Khoản
                 </span>
-                <p className="text-xl sm:text-2xl font-black text-amber-300 tracking-wider font-mono">
+                <p className="text-xl sm:text-2xl font-black text-[#1f6fac] tracking-wider font-digit">
                   {bank.accountNumber}
                 </p>
               </div>
 
               <button
                 onClick={() => handleCopy(bank.accountNumber, 'account')}
-                className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition-all duration-300 shadow ${
+                className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold font-alt transition-all duration-300 shadow cursor-pointer ${
                   copiedField === 'account'
-                    ? 'bg-emerald-500 text-slate-950 shadow-emerald-500/30'
-                    : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/20'
+                    ? 'bg-emerald-600 text-white shadow-emerald-600/25'
+                    : 'bg-[#0284c7] hover:bg-[#1f6fac] text-white shadow-[#0284c7]/25'
                 }`}
               >
                 {copiedField === 'account' ? (
@@ -181,22 +186,22 @@ export const QRPayment: React.FC = () => {
             </div>
 
             {/* Transfer Message with Copy Button */}
-            <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-2">
+            <div className="p-3.5 rounded-xl bg-[#f0f9ff]/90 border border-[#0284c7]/15 flex items-center justify-between gap-2">
               <div className="overflow-hidden">
-                <span className="text-xs uppercase tracking-wider text-slate-400 block mb-1 font-medium">
+                <span className="text-xs uppercase tracking-wider text-[#0369a1] block mb-1 font-bold font-alt">
                   Nội Dung Chuyển Khoản
                 </span>
-                <p className="text-sm sm:text-base font-bold text-slate-200 tracking-wide break-all font-mono">
+                <p className="text-sm sm:text-base font-bold text-[#0c4a6e] tracking-wide break-all">
                   {bank.transferMessage}
                 </p>
               </div>
 
               <button
                 onClick={() => handleCopy(bank.transferMessage, 'message')}
-                className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all duration-300 border ${
+                className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold font-alt transition-all duration-300 border cursor-pointer ${
                   copiedField === 'message'
-                    ? 'bg-emerald-500 text-slate-950 border-emerald-400'
-                    : 'bg-slate-800 hover:bg-slate-700 text-amber-300 border-amber-500/30'
+                    ? 'bg-emerald-600 text-white border-emerald-600'
+                    : 'bg-white hover:bg-[#e0f2fe] text-[#0284c7] border-[#0284c7]/25'
                 }`}
               >
                 {copiedField === 'message' ? (
@@ -219,7 +224,7 @@ export const QRPayment: React.FC = () => {
                 href={bank.bankingAppUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center gap-2 p-3 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg transition-all"
+                className="flex items-center justify-center gap-2 p-3.5 rounded-xl sn2-btn-primary font-bold text-xs uppercase tracking-wider font-alt"
               >
                 <ExternalLink className="w-4 h-4" />
                 MỞ ỨNG DỤNG NGÂN HÀNG
@@ -227,8 +232,8 @@ export const QRPayment: React.FC = () => {
             )}
 
             {/* Polite Note */}
-            <div className="flex items-start gap-2 text-xs text-slate-400 mt-1">
-              <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2 text-xs text-[#0369a1] mt-1">
+              <Sparkles className="w-4 h-4 text-[#f5c542] flex-shrink-0 mt-0.5" />
               <span>
                 Mọi đóng góp, lời chúc hay sự hiện diện của bạn tại buổi lễ đều là động lực quý báu để CLB tiếp tục phát triển!
               </span>
@@ -241,24 +246,24 @@ export const QRPayment: React.FC = () => {
       {isQrZoomed && (
         <div
           onClick={() => setIsQrZoomed(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#041f3d]/80 backdrop-blur-md animate-fade-in"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-sm w-full bg-slate-900 border border-amber-500/40 rounded-3xl p-6 text-center shadow-2xl flex flex-col items-center"
+            className="relative max-w-sm w-full bg-white border-2 border-[#7dd3fc] rounded-3xl p-6 text-center shadow-2xl flex flex-col items-center text-[#0c4a6e]"
           >
             <button
               onClick={() => setIsQrZoomed(false)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-slate-800 text-slate-300 hover:text-white"
+              className="absolute top-4 right-4 p-2 rounded-full bg-[#e0f2fe] text-[#0284c7] hover:bg-[#bae6fd] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-bold mb-3">
+            <span className="text-xs uppercase tracking-widest text-[#0284c7] font-bold font-alt mb-3">
               MÃ QR CHUYỂN KHOẢN
             </span>
 
-            <div className="bg-white p-3 rounded-2xl shadow-inner max-w-[280px]">
+            <div className="bg-[#f0f9ff] p-3 rounded-2xl border border-[#7dd3fc]/50 max-w-[280px]">
               <img
                 src={currentQrImage}
                 alt="QR Chuyển khoản phóng to"
@@ -266,13 +271,13 @@ export const QRPayment: React.FC = () => {
               />
             </div>
 
-            <p className="text-white font-bold text-base mt-4">{bank.bankName}</p>
-            <p className="text-amber-300 font-mono text-lg font-extrabold">{bank.accountNumber}</p>
-            <p className="text-slate-300 text-xs mt-1">{bank.accountName}</p>
+            <p className="text-[#0c4a6e] font-bold text-base mt-4 font-display">{bank.bankName}</p>
+            <p className="text-[#1f6fac] font-digit text-lg font-extrabold mt-0.5">{bank.accountNumber}</p>
+            <p className="text-[#0369a1] text-xs font-semibold mt-1">{bank.accountName}</p>
 
             <button
               onClick={handleDownloadQr}
-              className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shadow-lg shadow-amber-500/20"
+              className="mt-5 w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold font-alt sn2-btn-primary cursor-pointer"
             >
               <Download className="w-4 h-4" />
               TẢI ẢNH QR VỀ ĐIỆN THOẠI

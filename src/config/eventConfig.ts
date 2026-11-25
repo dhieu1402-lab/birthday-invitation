@@ -211,8 +211,8 @@ export const eventConfig: EventConfig = {
   },
 
   theme: {
-    primaryColor: "#0284c7", // Xanh cyan nhận diện thương hiệu
-    accentColor: "#84cc16",  // Xanh lá tươi
-    goldColor: "#f59e0b",    // Vàng champagne tiệc sinh nhật
+    primaryColor: "#88cef4", // Xanh da trời nhạt (Dynamic Blue)
+    accentColor: "#1f6fac",  // Xanh đại dương đậm
+    goldColor: "#f5c542",    // Vàng đồng ấm (Wax seal / huy hiệu)
   },
 };

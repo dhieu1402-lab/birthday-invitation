@@ -67,7 +67,7 @@ export const RSVPSection: React.FC = () => {
           particleCount: 120,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#22c55e', '#38bdf8', '#fbbf24'],
+          colors: ['#88cef4', '#0284c7', '#f5c542', '#38bdf8'],
         });
       }
     }, 700);
@@ -85,53 +85,59 @@ export const RSVPSection: React.FC = () => {
     <section id="rsvp" className="relative w-full py-16 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-10">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 mb-3">
-            <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" />
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-alt mb-3">
+            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
             PHẢN HỒI THAM DỰ
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-['Playfair_Display']">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0a568b] tracking-tight font-display">
             WILL YOU JOIN US?
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-sky-400 mx-auto mt-4 rounded-full"></div>
-          <p className="text-slate-400 text-sm sm:text-base mt-3">
+          <div className="w-20 h-1 bg-gradient-to-r from-[#88cef4] to-[#0284c7] mx-auto mt-4 rounded-full"></div>
+          <p className="text-[#0369a1] text-sm sm:text-base mt-3">
             Để Ban Tổ Chức {club.shortName} chuẩn bị đón tiếp bạn chu đáo nhất, xin vui lòng xác nhận sự tham gia của bạn nhé!
           </p>
         </div>
 
-        {/* Card Form */}
-        <div className="relative glass-card rounded-3xl p-6 sm:p-10 border-slate-700/60 shadow-2xl backdrop-blur-2xl">
+        {/* Paper Card Form */}
+        <div className="relative sn2-paper-card rounded-3xl p-6 sm:p-10 overflow-hidden">
+          {/* Sky-Blue Corner Accents */}
+          <div className="absolute top-3 left-3 w-7 h-7 border-t-2 border-l-2 border-[#7dd3fc] rounded-tl-lg pointer-events-none"></div>
+          <div className="absolute top-3 right-3 w-7 h-7 border-t-2 border-r-2 border-[#7dd3fc] rounded-tr-lg pointer-events-none"></div>
+          <div className="absolute bottom-3 left-3 w-7 h-7 border-b-2 border-l-2 border-[#7dd3fc] rounded-bl-lg pointer-events-none"></div>
+          <div className="absolute bottom-3 right-3 w-7 h-7 border-b-2 border-r-2 border-[#7dd3fc] rounded-br-lg pointer-events-none"></div>
+
           {isSubmitted ? (
             <div className="text-center py-8 animate-fade-in">
-              <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-4 border border-emerald-400/30">
+              <div className="w-16 h-16 rounded-full bg-[#e0f2fe] text-[#0284c7] flex items-center justify-center mx-auto mb-4 border border-[#7dd3fc]">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-2 font-['Playfair_Display']">
+              <h3 className="text-2xl font-bold text-[#0c4a6e] mb-2 font-display">
                 Cảm ơn bạn, {fullName}!
               </h3>
 
-              <p className="text-slate-300 text-sm sm:text-base max-w-md mx-auto mb-4 leading-relaxed">
+              <p className="text-[#0369a1] text-sm sm:text-base max-w-md mx-auto mb-4 leading-relaxed">
                 {attendance === 'yes' ? (
                   <>
                     🎉 Ban Tổ Chức đã ghi nhận xác nhận tham dự của bạn. Hẹn gặp bạn tại buổi tiệc sinh nhật của{' '}
-                    <strong className="text-amber-300">{club.shortName}</strong>!
+                    <strong className="text-[#0c4a6e]">{club.shortName}</strong>!
                   </>
                 ) : (
                   <>
                     Rất tiếc vì bạn không thể tham gia lần này. Cảm ơn tình cảm và lời chúc quý báu của bạn dành cho{' '}
-                    <strong className="text-amber-300">{club.shortName}</strong>!
+                    <strong className="text-[#0c4a6e]">{club.shortName}</strong>!
                   </>
                 )}
               </p>
 
               {/* Status Note about Backend Config */}
-              <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-400 max-w-sm mx-auto mb-6">
+              <div className="p-3.5 rounded-xl bg-[#f0f9ff] border border-[#0284c7]/15 text-xs text-[#0369a1] max-w-sm mx-auto mb-6">
                 {!rsvp.googleSheetWebhookUrl ? (
                   <span>
-                    ℹ️ <em>Hệ thống đang chạy ở chế độ Demo UI. Bạn có thể kết nối Google Sheets trong file <code className="text-amber-300">eventConfig.ts</code> để lưu vào bảng tính thực tế.</em>
+                    ℹ️ <em>Hệ thống đang chạy ở chế độ Demo UI. Bạn có thể kết nối Google Sheets trong file <code className="text-[#0c4a6e] font-semibold">eventConfig.ts</code> để lưu vào bảng tính thực tế.</em>
                   </span>
                 ) : (
-                  <span className="text-emerald-400">
+                  <span className="text-emerald-700 font-medium">
                     ✓ Dữ liệu phản hồi đã được chuyển tiếp đến hệ thống Google Sheets của BTC.
                   </span>
                 )}
@@ -139,20 +145,20 @@ export const RSVPSection: React.FC = () => {
 
               <button
                 onClick={handleReset}
-                className="px-6 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
+                className="px-6 py-2.5 rounded-xl text-xs font-bold font-alt bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0c4a6e] border border-[#0284c7]/20 transition-colors cursor-pointer"
               >
                 GỬI PHẢN HỒI KHÁC
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
               {/* Full Name */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                  Họ và Tên <span className="text-rose-400">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-alt mb-2">
+                  Họ và Tên <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#0284c7]">
                     <User className="w-4 h-4" />
                   </div>
                   <input
@@ -161,18 +167,18 @@ export const RSVPSection: React.FC = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Ví dụ: Nguyễn Văn An"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 text-sm transition-all"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/90 border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all"
                   />
                 </div>
               </div>
 
               {/* Phone */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                  Số điện thoại <span className="text-slate-500 text-[10px] font-normal">(Không bắt buộc)</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-alt mb-2">
+                  Số điện thoại <span className="text-slate-400 text-[10px] font-normal">(Không bắt buộc)</span>
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#0284c7]">
                     <Phone className="w-4 h-4" />
                   </div>
                   <input
@@ -180,58 +186,58 @@ export const RSVPSection: React.FC = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Số điện thoại hoặc Zalo để nhận thông báo"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 text-sm transition-all"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/90 border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all"
                   />
                 </div>
               </div>
 
               {/* Attendance Options */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2.5">
-                  Bạn có thể tham dự cùng chúng mình không? <span className="text-rose-400">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-alt mb-2.5">
+                  Bạn có thể tham dự cùng chúng mình không? <span className="text-rose-500">*</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <button
                     type="button"
                     onClick={() => setAttendance('yes')}
-                    className={`flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all ${
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       attendance === 'yes'
-                        ? 'bg-emerald-500/20 border-emerald-400/80 text-white shadow-lg shadow-emerald-500/10'
-                        : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                        ? 'bg-[#88cef4]/25 border-[#0284c7] text-[#0c4a6e] shadow-md shadow-[#0284c7]/10'
+                        : 'bg-white/70 border-[#0284c7]/15 text-slate-500 hover:border-[#7dd3fc]'
                     }`}
                   >
                     <div
                       className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        attendance === 'yes' ? 'border-emerald-400 bg-emerald-400' : 'border-slate-600'
+                        attendance === 'yes' ? 'border-[#0284c7] bg-[#0284c7]' : 'border-slate-300'
                       }`}
                     >
-                      {attendance === 'yes' && <div className="w-2 h-2 rounded-full bg-slate-950"></div>}
+                      {attendance === 'yes' && <div className="w-2 h-2 rounded-full bg-white"></div>}
                     </div>
                     <div>
-                      <span className="text-sm font-bold block text-white">Có, mình sẽ tham gia!</span>
-                      <span className="text-[11px] text-slate-400">YES! I'LL BE THERE</span>
+                      <span className="text-sm font-bold block text-[#0c4a6e] font-alt">Có, mình sẽ tham gia!</span>
+                      <span className="text-[11px] text-[#0369a1]">YES! I'LL BE THERE</span>
                     </div>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setAttendance('no')}
-                    className={`flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all ${
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       attendance === 'no'
-                        ? 'bg-rose-500/20 border-rose-400/80 text-white shadow-lg shadow-rose-500/10'
-                        : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                        ? 'bg-rose-50 border-rose-400 text-rose-900 shadow-md shadow-rose-500/10'
+                        : 'bg-white/70 border-[#0284c7]/15 text-slate-500 hover:border-[#7dd3fc]'
                     }`}
                   >
                     <div
                       className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        attendance === 'no' ? 'border-rose-400 bg-rose-400' : 'border-slate-600'
+                        attendance === 'no' ? 'border-rose-500 bg-rose-500' : 'border-slate-300'
                       }`}
                     >
-                      {attendance === 'no' && <div className="w-2 h-2 rounded-full bg-slate-950"></div>}
+                      {attendance === 'no' && <div className="w-2 h-2 rounded-full bg-white"></div>}
                     </div>
                     <div>
-                      <span className="text-sm font-bold block text-white">Rất tiếc, mình bận</span>
-                      <span className="text-[11px] text-slate-400">SORRY, CAN'T MAKE IT</span>
+                      <span className="text-sm font-bold block text-[#0c4a6e] font-alt">Rất tiếc, mình bận</span>
+                      <span className="text-[11px] text-slate-500">SORRY, CAN'T MAKE IT</span>
                     </div>
                   </button>
                 </div>
@@ -239,11 +245,11 @@ export const RSVPSection: React.FC = () => {
 
               {/* Message */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                  Lời nhắn gửi đến CLB <span className="text-slate-500 text-[10px] font-normal">(Không bắt buộc)</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-alt mb-2">
+                  Lời nhắn gửi đến CLB <span className="text-slate-400 text-[10px] font-normal">(Không bắt buộc)</span>
                 </label>
                 <div className="relative">
-                  <div className="absolute top-3 left-3.5 pointer-events-none text-slate-400">
+                  <div className="absolute top-3 left-3.5 pointer-events-none text-[#0284c7]">
                     <MessageSquare className="w-4 h-4" />
                   </div>
                   <textarea
@@ -251,14 +257,14 @@ export const RSVPSection: React.FC = () => {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Gửi lời chúc mừng sinh nhật hoặc nhắn nhủ đến BTC..."
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 text-sm transition-all resize-none"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/90 border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all resize-none"
                   ></textarea>
                 </div>
               </div>
 
               {/* Error Alert */}
               {errorMessage && (
-                <div className="flex items-center gap-2 p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs">
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-rose-50 border border-rose-300 text-rose-700 text-xs font-medium">
                   <AlertCircle className="w-4 h-4 flex-shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
@@ -268,11 +274,11 @@ export const RSVPSection: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-extrabold text-sm uppercase tracking-wider text-slate-950 bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 hover:from-emerald-300 hover:to-teal-200 shadow-xl shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-bold text-sm uppercase tracking-wider sn2-btn-primary font-alt cursor-pointer disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <>
-                    <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></span>
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
                     <span>ĐANG GỬI XÁC NHẬN...</span>
                   </>
                 ) : (

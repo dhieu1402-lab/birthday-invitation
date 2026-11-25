@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, Sparkles } from 'lucide-react';
+import { Calendar, Clock, Sparkles, Zap } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
 
 interface TimeLeft {
@@ -58,80 +58,95 @@ export const Countdown: React.FC = () => {
   const formatNumber = (num: number) => String(num).padStart(2, '0');
 
   const timeUnits = [
-    { label: 'NGÀY', enLabel: 'DAYS', value: formatNumber(timeLeft.days) },
-    { label: 'GIỜ', enLabel: 'HOURS', value: formatNumber(timeLeft.hours) },
-    { label: 'PHÚT', enLabel: 'MINUTES', value: formatNumber(timeLeft.minutes) },
-    { label: 'GIÂY', enLabel: 'SECONDS', value: formatNumber(timeLeft.seconds) },
+    { label: 'Ngày', enLabel: 'DAYS', value: formatNumber(timeLeft.days) },
+    { label: 'Giờ', enLabel: 'HOURS', value: formatNumber(timeLeft.hours) },
+    { label: 'Phút', enLabel: 'MINUTES', value: formatNumber(timeLeft.minutes) },
+    { label: 'Giây', enLabel: 'SECONDS', value: formatNumber(timeLeft.seconds) },
   ];
+
+  // Extract start time e.g. "18:00" for the digital scoreboard
+  const startTimeShort = eventConfig.event.timeDisplay.split(' ')[0] || '18:00';
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8">
       {timeLeft.isExpired ? (
-        <div className="glass-card rounded-3xl p-8 text-center border-amber-500/40 bg-gradient-to-br from-amber-500/10 via-slate-900/60 to-purple-900/20 shadow-2xl">
-          <div className="inline-flex p-4 rounded-full bg-amber-500/20 text-amber-300 mb-4 animate-bounce">
+        <div className="sn2-paper-card rounded-3xl p-8 text-center">
+          <div className="inline-flex p-4 rounded-full bg-[#e0f2fe] text-[#0284c7] mb-4 animate-bounce border border-[#7dd3fc]">
             <Sparkles className="w-8 h-8" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-bold text-amber-200 mb-2 font-['Playfair_Display']">
+          <h3 className="text-2xl sm:text-3xl font-bold text-[#0c4a6e] mb-2 font-display">
             Sự Kiện Đang Diễn Ra!
           </h3>
-          <p className="text-slate-300 max-w-lg mx-auto text-base">
+          <p className="text-[#0369a1] max-w-lg mx-auto text-base">
             Chào mừng bạn đến với ngày hội sinh nhật của {eventConfig.club.shortName}. Chúc bạn có những phút giây thật thăng hoa và trọn vẹn kỷ niệm!
           </p>
         </div>
       ) : (
-        <div className="relative">
-          {/* Subtle Ambient Glow */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-sky-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-70"></div>
+        <div className="sn2-paper-card rounded-3xl p-6 sm:p-10">
+          {/* Header */}
+          <div className="text-center mb-6">
+            <h3 className="text-3xl sm:text-4xl font-bold text-[#0c4a6e] tracking-tight font-display">
+              Tiệc sinh nhật
+            </h3>
+          </div>
 
-          <div className="relative glass-card rounded-3xl p-6 sm:p-10 border-slate-700/60 shadow-2xl backdrop-blur-2xl">
-            <div className="text-center mb-8">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase text-amber-300 bg-amber-500/10 border border-amber-500/30 mb-3">
-                <Clock className="w-3.5 h-3.5" />
-                ĐẾM NGƯỢC THỜI KHẮC ĐẶC BIỆT
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-['Playfair_Display']">
-                Cùng Đếm Ngược Đến Giờ G
-              </h3>
-              <p className="text-slate-400 text-sm mt-1">
-                Thời gian tính theo múi giờ Việt Nam (Asia/Ho_Chi_Minh)
-              </p>
+          {/* Navy Scoreboard Time Banner (matching traothiep.vn) */}
+          <div className="max-w-md mx-auto mb-8 rounded-2xl sn2-scoreboard px-6 py-6 text-center">
+            <span className="text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase text-[#bae6fd]/85 font-alt block mb-1.5">
+              GIỜ KHAI TIỆC
+            </span>
+            <div className="text-4xl sm:text-5xl font-black text-[#7dd3fc] font-digit tracking-wider drop-shadow-[0_0_24px_rgba(125,211,252,0.5)]">
+              {startTimeShort}
             </div>
-
-            {/* Grid of digits */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-6">
-              {timeUnits.map((unit, index) => (
-                <div
-                  key={index}
-                  className="relative group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-inner hover:border-amber-500/40 transition-all duration-300"
-                >
-                  {/* Top shimmer accent */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-transparent via-amber-400/60 to-transparent rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
-
-                  <span className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-amber-100 to-amber-300 tracking-tighter tabular-nums drop-shadow-sm">
-                    {unit.value}
-                  </span>
-
-                  <span className="text-xs sm:text-sm font-bold text-amber-400 tracking-widest mt-2">
-                    {unit.label}
-                  </span>
-                  <span className="text-[10px] uppercase tracking-wider text-slate-500 font-medium">
-                    {unit.enLabel}
-                  </span>
-                </div>
-              ))}
+            <div className="flex items-center justify-center gap-2 mt-2.5 text-[#f5c542]">
+              <Zap className="w-3.5 h-3.5 fill-[#f5c542]" />
+              <Zap className="w-3.5 h-3.5 fill-[#f5c542]" />
+              <Zap className="w-3.5 h-3.5 fill-[#f5c542]" />
             </div>
+          </div>
 
-            <div className="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-4 text-xs text-slate-400">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="w-4 h-4 text-amber-400" />
-                {eventConfig.event.dateDisplay}
-              </span>
-              <span className="text-slate-600 hidden sm:inline">•</span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4 text-amber-400" />
-                {eventConfig.event.timeDisplay}
-              </span>
-            </div>
+          {/* Countdown Sub-heading */}
+          <div className="text-center mb-5">
+            <span className="text-xs sm:text-sm font-bold tracking-[0.18em] uppercase text-[#0284c7] font-alt block">
+              CÙNG ĐẾM NGƯỢC ĐẾN GIỜ G
+            </span>
+            <p className="text-slate-500 text-xs mt-1">
+              Thời gian chính xác theo múi giờ Việt Nam (Asia/Ho_Chi_Minh)
+            </p>
+          </div>
+
+          {/* 4 White Digit Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-5 max-w-2xl mx-auto">
+            {timeUnits.map((unit, index) => (
+              <div
+                key={index}
+                className="relative group flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl bg-white/95 border border-[#0284c7]/18 shadow-[6px_6px_0_rgba(14,165,233,0.10)] hover:border-[#38bdf8] hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0c4a6e] font-digit tracking-tight tabular-nums">
+                  {unit.value}
+                </span>
+
+                <span className="text-sm font-bold text-[#0369a1] font-alt mt-1.5">
+                  {unit.label}
+                </span>
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+                  {unit.enLabel}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Event Date & Time Strip */}
+          <div className="mt-8 pt-6 border-t border-[#0284c7]/12 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-[#0369a1] font-medium">
+            <span className="flex items-center gap-1.5">
+              <Calendar className="w-4 h-4 text-[#0284c7]" />
+              {eventConfig.event.dateDisplay}
+            </span>
+            <span className="text-[#7dd3fc] hidden sm:inline">•</span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="w-4 h-4 text-[#0284c7]" />
+              {eventConfig.event.timeDisplay}
+            </span>
           </div>
         </div>
       )}
