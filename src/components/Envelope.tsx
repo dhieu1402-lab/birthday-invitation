@@ -9,12 +9,12 @@ interface EnvelopeProps {
 
 export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
   const [isOpenAnimation, setIsOpenAnimation] = useState(false);
+  const { club, event } = eventConfig;
 
   const handleOpenClick = () => {
     if (isOpenAnimation) return;
     setIsOpenAnimation(true);
 
-    // Confetti celebration burst in Dynamic Blue & Gold palette
     const count = 200;
     const defaults = {
       origin: { y: 0.7 },
@@ -56,7 +56,6 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
       colors: ['#88cef4', '#ffffff'],
     });
 
-    // Notify parent to unlock site and start audio
     setTimeout(() => {
       onOpen();
     }, 1200);
@@ -77,17 +76,25 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
 
       {/* Main Container */}
       <div className="relative z-10 w-full max-w-md sm:max-w-lg flex flex-col items-center">
-        {/* Top Tagline */}
+        {/* Top Tagline & Institution Hierarchy */}
         <div className="text-center mb-6 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-white/15 border border-white/30 text-[#e0f7ff] mb-3 shadow-lg font-alt backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-white/15 border border-white/30 text-[#e0f7ff] mb-3 shadow-lg font-display backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5 text-[#f5c542]" />
-            OFFICIAL DIGITAL INVITATION
+            THIỆP MỜI ĐIỆN TỬ CHÍNH THỨC
           </div>
-          <h2 className="text-sm sm:text-base font-semibold tracking-widest text-[#bae6fd] uppercase font-alt">
-            {eventConfig.club.name}
+          <p className="text-[11px] sm:text-xs font-medium tracking-wider text-[#bae6fd]/90 uppercase">
+            {club.university}
+          </p>
+          <p className="text-[11px] sm:text-xs font-medium tracking-wider text-[#bae6fd]/80 uppercase mt-0.5">
+            {club.faculty}
+          </p>
+          <h2 className="text-sm sm:text-base font-bold tracking-widest text-[#e0f7ff] uppercase font-display mt-1.5">
+            {club.name} ({club.shortName})
           </h2>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-display mt-1 drop-shadow-[0_3px_0_rgba(4,31,61,0.5)]">
-            {eventConfig.event.editionText}
+          {/* 2 dòng cân đối */}
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-display mt-2 leading-tight drop-shadow-[0_3px_0_rgba(4,31,61,0.5)]">
+            <span className="block">{event.editionLine1}</span>
+            <span className="block text-[#7dd3fc]">{event.editionLine2}</span>
           </h1>
         </div>
 
@@ -96,39 +103,38 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
           {/* Card Sliding Out Animation */}
           <div
             className={`absolute inset-x-4 top-2 bottom-6 bg-white rounded-2xl p-5 shadow-2xl border border-[#7dd3fc]/50 transition-all duration-1000 ease-out flex flex-col items-center justify-between text-[#0c4a6e] ${
-              isOpenAnimation ? '-translate-y-28 opacity-100 scale-102 shadow-[#0284c7]/30' : 'translate-y-2 opacity-85'
+              isOpenAnimation ? '-translate-y-28 opacity-100 scale-102 shadow-[#0284c7]/30' : 'translate-y-2 opacity-90'
             }`}
           >
             <div className="w-full flex items-center justify-between border-b border-[#0284c7]/15 pb-2">
-              <span className="text-[10px] uppercase tracking-widest font-bold text-[#0284c7] font-alt">
-                {eventConfig.club.shortName}
+              <span className="text-[10px] uppercase tracking-widest font-bold text-[#0284c7] font-display">
+                {club.shortName}
               </span>
               <span className="text-[10px] font-semibold text-[#0369a1]">
-                {eventConfig.event.dateDisplay}
+                Bắt đầu: {event.startTime} • {event.dateDisplay}
               </span>
             </div>
 
             <div className="text-center my-auto">
               <p className="font-script text-3xl sm:text-4xl text-[#0c4a6e] font-bold">
-                You're Invited!
+                Trân Trọng Kính Mời!
               </p>
               <p className="text-xs text-[#0369a1] mt-1 font-medium">
-                Kính mời tham dự tiệc sinh nhật
+                Kính mời Anh/Chị/Bạn tham dự tiệc sinh nhật CLB
               </p>
             </div>
 
             <div className="w-12 h-1 bg-gradient-to-r from-[#88cef4] to-[#0284c7] rounded-full mx-auto"></div>
           </div>
 
-          {/* Envelope Pocket Base (Frosted Ice-Blue Glass) */}
+          {/* Envelope Pocket Base */}
           <div className="absolute inset-0 rounded-2xl bg-white/12 backdrop-blur-xl border border-white/30 shadow-[0_24px_60px_rgba(4,31,61,0.45)] overflow-hidden flex flex-col justify-end p-6">
-            {/* Decorative bottom fold */}
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[#041f3d]/70 to-transparent"></div>
               <div className="absolute bottom-0 inset-x-0 h-1/2 border-t border-white/25 bg-gradient-to-b from-[#0a3d6b]/60 to-[#041f3d]/85"></div>
             </div>
 
-            {/* Envelope Flap Fold (Top Triangle) */}
+            {/* Envelope Flap Fold */}
             <div
               className={`absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-[#0d6b9e]/90 to-[#0a3d6b]/95 border-b border-white/30 origin-top transition-transform duration-700 ease-in-out ${
                 isOpenAnimation ? '-rotate-x-180 z-0' : 'rotate-x-0 z-20'
@@ -142,9 +148,9 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
             {!isOpenAnimation && (
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center justify-center">
                 <div className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full sn2-gold-seal p-1 pulse-glow cursor-pointer">
-                  <div className="w-full h-full rounded-full border border-[#fff]/55 flex flex-col items-center justify-center">
-                    <span className="text-[9px] font-bold text-[#6b4708] tracking-wider font-digit">EEC</span>
-                    <span className="text-xs font-black text-[#5c3a06] font-digit">15th</span>
+                  <div className="w-full h-full rounded-full border border-[#fff]/55 flex flex-col items-center justify-center font-display">
+                    <span className="text-[10px] font-bold text-[#6b4708] tracking-wider">EEC</span>
+                    <span className="text-xs font-bold text-[#5c3a06]">15 năm</span>
                   </div>
                 </div>
               </div>
@@ -152,12 +158,12 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
           </div>
         </div>
 
-        {/* Action Button: OPEN INVITATION */}
+        {/* Action Button */}
         <div className="mt-10 flex flex-col items-center">
           <button
             onClick={handleOpenClick}
             disabled={isOpenAnimation}
-            className="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-full font-bold text-sm sm:text-base tracking-wider uppercase sn2-btn-primary font-alt active:scale-95 cursor-pointer"
+            className="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-full font-bold text-sm sm:text-base tracking-wider uppercase sn2-btn-primary font-display active:scale-95 cursor-pointer"
           >
             <Mail className="w-5 h-5 text-white transition-transform group-hover:rotate-12" />
             <span>MỞ THIỆP MỜI</span>

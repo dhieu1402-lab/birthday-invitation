@@ -9,6 +9,7 @@ import { PaymentSection } from './sections/PaymentSection';
 import { FooterSection } from './sections/FooterSection';
 import { MusicControl } from './components/MusicControl';
 import { QuickNav } from './components/QuickNav';
+import { SectionDivider } from './components/SectionDivider';
 
 export const App: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -18,7 +19,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f0f9ff] via-[#e0f2fe] to-[#f0f9ff] text-[#0c4a6e] flex flex-col font-body selection:bg-[#88cef4]/40 selection:text-[#041f3d]">
+    <div className="min-h-screen bg-[#f0f9ff] bg-gradient-to-b from-[#f0f9ff] via-[#e0f2fe] to-[#f0f9ff] text-[#0c4a6e] flex flex-col font-body selection:bg-[#88cef4]/40 selection:text-[#041f3d]">
       {/* Subtle Sky-Blue Pattern */}
       <div className="fixed inset-0 bg-[radial-gradient(#7dd3fc_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none"></div>
 
@@ -31,30 +32,40 @@ export const App: React.FC = () => {
         <HeroSection isOpened={false} onOpen={handleOpenInvitation} />
       ) : (
         <main className="relative z-10 flex flex-col animate-fade-in">
-          {/* Hero Welcome */}
+          {/* Section 1: Hero Welcome */}
           <HeroSection isOpened={true} onOpen={handleOpenInvitation} />
 
-          {/* Section 2: Formal Invitation */}
+          {/* Section 2: Lời mời trang trọng */}
           <InvitationSection />
 
-          {/* Section 3: Event Details */}
+          <SectionDivider />
+
+          {/* Section 3: Thông tin sự kiện & Timeline */}
           <EventInfoSection />
 
-          {/* Section 4: Countdown Timer */}
-          <section id="countdown" className="relative w-full py-6">
+          <SectionDivider />
+
+          {/* Section 4: Đếm ngược giờ bắt đầu */}
+          <section id="countdown" className="relative w-full py-8 sm:py-10">
             <Countdown />
           </section>
 
-          {/* Section 5: Photo Album Memories */}
+          <SectionDivider />
+
+          {/* Section 5: Album Kỷ Niệm */}
           <MemoriesSection />
 
-          {/* Section 6: RSVP Attendance Form */}
+          <SectionDivider />
+
+          {/* Section 6: Xác nhận tham dự */}
           <RSVPSection />
 
-          {/* Section 7: QR Gift / Transfer */}
+          <SectionDivider />
+
+          {/* Section 7: Gửi quà & QR Chuyển khoản */}
           <PaymentSection />
 
-          {/* Section 8: Thank You & Footer */}
+          {/* Section 8: Lời cảm ơn & Chân trang */}
           <FooterSection />
         </main>
       )}

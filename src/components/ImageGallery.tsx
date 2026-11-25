@@ -30,7 +30,6 @@ export const ImageGallery: React.FC = () => {
     }
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedImageIndex === null) return;
@@ -44,18 +43,18 @@ export const ImageGallery: React.FC = () => {
   }, [selectedImageIndex, memories.length]);
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-12">
+    <div className="w-full max-w-6xl mx-auto px-4 py-6 sm:py-8">
       <div className="text-center mb-10">
-        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-alt mb-3">
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-display mb-3">
           <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
           HÀNH TRÌNH ĐÁNG NHỚ
         </span>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0c4a6e] tracking-tight font-display">
-          OUR MEMORIES
+          KHOẢNH KHẮC KỶ NIỆM
         </h2>
         <div className="w-20 h-1 bg-gradient-to-r from-[#88cef4] via-[#0284c7] to-[#1f6fac] mx-auto mt-4 rounded-full"></div>
         <p className="text-[#0369a1] text-sm sm:text-base max-w-xl mx-auto mt-3">
-          Những dấu mốc thanh xuân, nụ cười rạng rỡ và tình bạn gắn bó của các thế hệ thành viên {eventConfig.club.shortName}
+          Những dấu mốc thanh xuân, nụ cười rạng rỡ và tình cảm gắn bó qua các thế hệ thành viên {eventConfig.club.shortName}
         </p>
       </div>
 
@@ -86,16 +85,16 @@ export const ImageGallery: React.FC = () => {
                 <ZoomIn className="w-4 h-4" />
               </div>
 
-              {/* Year Tag if available */}
+              {/* Year Tag */}
               {mem.year && (
-                <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#f5c542] text-[#5c3a06] font-alt shadow-sm">
+                <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#f5c542] text-[#5c3a06] font-display shadow-sm">
                   {mem.year}
                 </div>
               )}
 
               {/* Title & Caption */}
               <div className="absolute bottom-0 inset-x-0 p-4 transform translate-y-0.5 group-hover:translate-y-0 transition-transform">
-                <h4 className="text-white font-semibold text-sm sm:text-base leading-snug line-clamp-1 font-alt group-hover:text-[#7dd3fc] transition-colors">
+                <h4 className="text-white font-semibold text-sm sm:text-base leading-snug line-clamp-1 font-display group-hover:text-[#7dd3fc] transition-colors">
                   {mem.title}
                 </h4>
                 <p className="text-[#e0f2fe]/90 text-xs mt-1 line-clamp-2 opacity-85 group-hover:opacity-100 transition-opacity">
@@ -113,7 +112,6 @@ export const ImageGallery: React.FC = () => {
           onClick={handleCloseModal}
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#041f3d]/92 backdrop-blur-xl animate-fade-in"
         >
-          {/* Close button */}
           <button
             onClick={handleCloseModal}
             aria-label="Đóng ảnh"
@@ -122,7 +120,6 @@ export const ImageGallery: React.FC = () => {
             <X className="w-6 h-6" />
           </button>
 
-          {/* Previous button */}
           <button
             onClick={handlePrev}
             aria-label="Ảnh trước"
@@ -131,7 +128,6 @@ export const ImageGallery: React.FC = () => {
             <ChevronLeft className="w-6 h-6" />
           </button>
 
-          {/* Next button */}
           <button
             onClick={handleNext}
             aria-label="Ảnh sau"
@@ -140,7 +136,6 @@ export const ImageGallery: React.FC = () => {
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Modal Content */}
           <div
             onClick={(e) => e.stopPropagation()}
             className="relative max-w-4xl max-h-[90vh] w-full flex flex-col items-center justify-center"
@@ -153,9 +148,8 @@ export const ImageGallery: React.FC = () => {
               />
             </div>
 
-            {/* Modal Caption */}
             <div className="mt-4 text-center px-4 max-w-2xl">
-              <span className="text-xs uppercase tracking-widest text-[#7dd3fc] font-bold font-alt">
+              <span className="text-xs uppercase tracking-widest text-[#7dd3fc] font-bold font-display">
                 Khoảnh khắc {selectedImageIndex + 1} / {memories.length}
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-white mt-1 font-display">

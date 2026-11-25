@@ -3,7 +3,7 @@ import { ImageGallery } from '../components/ImageGallery';
 
 export const MemoriesSection: React.FC = () => {
   return (
-    <section id="memories" className="relative w-full py-12">
+    <section id="memories" className="relative w-full py-6 sm:py-8">
       <ImageGallery />
     </section>
   );

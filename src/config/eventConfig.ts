@@ -2,8 +2,8 @@
  * =====================================================================
  * FILE CẤU HÌNH DUY NHẤT CHO TOÀN BỘ WEBSITE THIỆP MỜI SINH NHẬT CLB
  * =====================================================================
- * Bạn có thể dễ dàng thay đổi toàn bộ thông tin sự kiện, màu sắc, hình ảnh,
- * thông tin chuyển khoản ngân hàng và các tùy chọn tương tác tại đây.
+ * Bạn có thể dễ dàng thay đổi toàn bộ thông tin sự kiện, timeline, màu sắc,
+ * hình ảnh, thông tin chuyển khoản ngân hàng tại đây.
  */
 
 export interface MemoryImage {
@@ -12,6 +12,12 @@ export interface MemoryImage {
   title: string;
   caption: string;
   year?: string;
+}
+
+export interface TimelineItem {
+  time: string;
+  title: string;
+  description: string;
 }
 
 export interface BankConfig {
@@ -26,8 +32,6 @@ export interface BankConfig {
 }
 
 export interface RsvpConfig {
-  // Đường dẫn Google Form hoặc Webhook Google Sheets (Apps Script) để lưu dữ liệu thực tế
-  // Nếu để trống (""), hệ thống sẽ tự động hiển thị chế độ Demo + lưu vào LocalStorage
   googleSheetWebhookUrl: string;
   googleFormDirectUrl?: string;
   contactHotline: string;
@@ -35,9 +39,11 @@ export interface RsvpConfig {
 
 export interface EventConfig {
   club: {
+    university: string;
+    faculty: string;
     name: string;
     shortName: string;
-    subTitle: string;
+    slogan?: string; // Khẩu hiệu CLB (tùy chọn, hiển thị nhỏ ở dòng riêng)
     logo: string;
     establishedYear: number;
     organizer: string;
@@ -45,14 +51,16 @@ export interface EventConfig {
   event: {
     title: string;
     theme: string;
-    editionText: string;
-    dateDisplay: string; // VD: 25 Tháng 12, 2026
-    timeDisplay: string; // VD: 18:00 - 21:30
-    // Định dạng ISO: YYYY-MM-DDTHH:mm:ss+07:00 (Múi giờ Việt Nam Asia/Ho_Chi_Minh)
-    targetDateTime: string; 
+    editionLine1: string; // Dòng 1: VD "SINH NHẬT"
+    editionLine2: string; // Dòng 2: VD "KỶ NIỆM 15 NĂM"
+    dateDisplay: string;
+    startTime: string; // Giờ bắt đầu chính thức để nhắc khách mời
+    timeDisplay: string;
+    targetDateTime: string; // Định dạng ISO: YYYY-MM-DDTHH:mm:ss+07:00
     venue: string;
     address: string;
     googleMapsUrl: string;
+    timeline: TimelineItem[];
   };
   invitation: {
     badge: string;
@@ -63,10 +71,10 @@ export interface EventConfig {
     signatureName: string;
   };
   music: {
-    audioUrl: string; // Đường dẫn file nhạc trong /public/music/ hoặc link mp3 online
+    audioUrl: string;
     title: string;
     artist: string;
-    useWebAudioSynthesizerFallback: boolean; // Nếu file nhạc chưa tải được, tự động phát giai điệu chúc mừng sinh nhật
+    useWebAudioSynthesizerFallback: boolean;
   };
   memories: MemoryImage[];
   rsvp: RsvpConfig;
@@ -79,7 +87,7 @@ export interface EventConfig {
     copyrightYear: number;
   };
   theme: {
-    primaryColor: string; // Màu chủ đạo (hex/css)
+    primaryColor: string;
     accentColor: string;
     goldColor: string;
   };
@@ -87,40 +95,66 @@ export interface EventConfig {
 
 export const eventConfig: EventConfig = {
   club: {
+    university: "TRƯỜNG ĐẠI HỌC XÂY DỰNG HÀ NỘI",
+    faculty: "KHOA KINH TẾ VÀ QUẢN LÝ XÂY DỰNG",
     name: "CLB KỸ SƯ KINH TẾ",
     shortName: "CEM - EEC",
-    subTitle: "ECONOMICS ENGINEERING CLUB • LEARNING TOGETHER",
+    slogan: "Cùng nhau học hỏi", // Để "" nếu muốn ẩn hoàn toàn khẩu hiệu
     logo: "./images/logo.png",
     establishedYear: 2011,
-    organizer: "Ban Chủ Nhiệm CLB Kỹ Sư Kinh Tế CEM - EEC",
+    organizer: "Ban Chủ Nhiệm CLB Kỹ Sư Kinh Tế (CEM - EEC)",
   },
 
   event: {
     title: "LỄ KỶ NIỆM SINH NHẬT CLB KỸ SƯ KINH TẾ",
     theme: "Dấu Ấn Tự Hào – Vững Bước Vươn Xa",
-    editionText: "SINH NHẬT KỶ NIỆM 15 NĂM",
+    editionLine1: "SINH NHẬT",
+    editionLine2: "KỶ NIỆM 15 NĂM",
     dateDisplay: "Thứ Bảy, 25/12/2026",
-    timeDisplay: "18:00 - 21:30 (Đón khách từ 17:30)",
-    // Thời điểm đếm ngược (Múi giờ Việt Nam UTC+7):
+    startTime: "18:00",
+    timeDisplay: "18:00 – 21:30 (Đón khách từ 17:30)",
     targetDateTime: "2026-12-25T18:00:00+07:00",
-    venue: "Hội trường G3 - Trường Đại học Xây dựng Hà Nội (HUCE)",
+    venue: "Hội trường G3 – Trường Đại học Xây dựng Hà Nội",
     address: "Số 55 Giải Phóng, Phường Đồng Tâm, Quận Hai Bà Trưng, TP. Hà Nội",
     googleMapsUrl: "https://maps.google.com/?q=Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+X%C3%A2y+d%E1%BB%B1ng+H%C3%A0+N%E1%BB%99i+55+Gi%E1%BA%A3i+Ph%C3%B3ng",
+    // Lịch trình dự kiến - cập nhật chi tiết theo kịch bản BTC
+    timeline: [
+      {
+        time: "17:30 – 18:00",
+        title: "Đón khách & Chụp ảnh lưu niệm",
+        description: "Đón tiếp đại biểu, cựu thành viên, các CLB bạn và lưu giữ những bức ảnh kỷ niệm đầu buổi.",
+      },
+      {
+        time: "18:00 – 18:30",
+        title: "Khai mạc & Đại diện Khoa phát biểu",
+        description: "Nhìn lại chặng đường 15 năm, lắng nghe lời chúc mừng từ Đại diện Khoa Kinh tế & Quản lý Xây dựng cùng Ban Chủ Nhiệm.",
+      },
+      {
+        time: "18:30 – 19:15",
+        title: "Nghi thức Sinh nhật & Giao lưu các thế hệ",
+        description: "Thổi nến cắt bánh mừng sinh nhật CLB, tri ân các thế hệ đi trước và chia sẻ câu chuyện gắn kết.",
+      },
+      {
+        time: "19:15 – 21:30",
+        title: "Tiết mục văn nghệ & Tiệc liên hoan",
+        description: "Thưởng thức các tiết mục văn nghệ đặc sắc, trò chơi giao lưu và dùng tiệc ấm cúng cùng đại gia đình CEM - EEC.",
+      },
+    ],
   },
 
   invitation: {
-    badge: "YOU ARE CORDIALLY INVITED",
+    badge: "THIỆP MỜI THAM DỰ",
     headline: "TRÂN TRỌNG KÍNH MỜI",
-    body: "Chúng mình trân trọng kính mời bạn đến tham dự buổi tiệc sinh nhật của CLB Kỹ Sư Kinh Tế (CEM - EEC). Hãy cùng nhau nhìn lại hành trình đã qua, gặp gỡ những người bạn tuyệt vời và tạo nên những kỷ niệm thật đáng nhớ!",
-    subText: "Sự hiện diện của bạn là niềm vinh hạnh to lớn và là món quà ý nghĩa nhất đối với đại gia đình CEM-EEC.",
+    body: "EEC trân trọng kính mời Anh/Chị/Bạn đến tham dự buổi tiệc sinh nhật của CLB Kỹ sư Kinh tế (CEM - EEC). Hãy cùng nhau nhìn lại hành trình đã qua, gặp gỡ những mối nhân duyên tuyệt vời và tạo nên những kỷ niệm thật đáng nhớ!",
+    subText: "Sự hiện diện của Anh/Chị/Bạn là niềm vinh hạnh to lớn và là món quà ý nghĩa nhất đối với đại gia đình CEM - EEC.",
     signatureTitle: "Thay mặt Ban Tổ Chức",
     signatureName: "Ban Chủ Nhiệm CEM - EEC",
   },
 
   music: {
     audioUrl: "./music/happy-birthday.mp3",
-    title: "Happy Birthday Celebration",
-    artist: "Acoustic Birthday Melody",
+    title: "Giai điệu Chúc mừng Sinh nhật",
+    artist: "Nhạc nền CLB",
     useWebAudioSynthesizerFallback: true,
   },
 
@@ -129,7 +163,7 @@ export const eventConfig: EventConfig = {
       id: "mem-1",
       url: "./images/memories/492957078_1291510556313067_4530635472757656294_n.jpg",
       title: "Khoảnh khắc đại gia đình",
-      caption: "Buổi gặp gỡ ấm áp của các thế hệ thành viên CEM-EEC",
+      caption: "Buổi gặp gỡ ấm áp của các thế hệ thành viên CEM - EEC",
       year: "2024",
     },
     {
@@ -163,8 +197,8 @@ export const eventConfig: EventConfig = {
     {
       id: "mem-6",
       url: "./images/memories/497789275_1311573050973484_1031158740136861693_n.jpg",
-      title: "Hoạt động chuyên môn & Workshop",
-      caption: "Học hỏi cùng nhau - Slogan Learning Together được thắp sáng",
+      title: "Hoạt động chuyên môn & Hội thảo",
+      caption: "Tinh thần học hỏi, chia sẻ tri thức cùng nhau phát triển",
       year: "Tri thức",
     },
     {
@@ -178,14 +212,12 @@ export const eventConfig: EventConfig = {
       id: "mem-8",
       url: "./images/memories/599551616_1502891078508346_5638285733786690186_n.jpg",
       title: "Chuyến đi đáng nhớ",
-      caption: "Những hành trình dã ngoại, team-building thắt chặt tình đoàn kết",
+      caption: "Những hành trình dã ngoại, gắn kết thắt chặt tình đoàn kết",
       year: "Hành trình",
     },
   ],
 
   rsvp: {
-    // Để trống ("") để chạy chế độ demo mượt mà (lưu localStorage và thông báo trực quan).
-    // Khi có Google Sheet Webhook URL, chỉ cần dán vào đây!
     googleSheetWebhookUrl: "",
     googleFormDirectUrl: "",
     contactHotline: "0365.140.206",
@@ -196,23 +228,23 @@ export const eventConfig: EventConfig = {
     bankCode: "MB",
     accountName: "DINH TRUNG HIEU",
     accountNumber: "36514022006",
-    defaultAmount: "", // Để trống để khách mời tự chọn
+    defaultAmount: "",
     transferMessage: "CHUC MUNG SINH NHAT EEC",
     qrImage: "./qr/qr-chuyenkhoan.jpg",
-    bankingAppUrl: "", // Hỗ trợ mở deep link ngân hàng nếu có
+    bankingAppUrl: "",
   },
 
   thanks: {
-    headline: "THANK YOU FOR BEING PART OF OUR JOURNEY!",
-    title: "CẢM ƠN VÌ ĐÃ LÀ MỘT PHẦN TRONG HÀNH TRÌNH CỦA CHÚNG MÌNH!",
-    message: "Cảm ơn bạn đã luôn tin tưởng, đồng hành và là một mảnh ghép không thể thiếu trong sự phát triển của CLB Kỹ Sư Kinh Tế CEM-EEC.",
+    headline: "TRÂN TRỌNG CẢM ƠN",
+    title: "CẢM ƠN ANH/CHỊ/BẠN ĐÃ LÀ MỘT PHẦN TRONG HÀNH TRÌNH CỦA CHÚNG MÌNH!",
+    message: "Cảm ơn Anh/Chị/Bạn đã luôn tin tưởng, đồng hành và là một mảnh ghép quý giá trong hành trình phát triển của CLB Kỹ sư Kinh tế (CEM - EEC).",
     subMessage: "Hy vọng chúng ta sẽ cùng nhau tạo nên thật nhiều kỷ niệm đẹp trong đêm tiệc và tiếp tục viết tiếp những chương mới rực rỡ!",
     copyrightYear: 2026,
   },
 
   theme: {
-    primaryColor: "#88cef4", // Xanh da trời nhạt (Dynamic Blue)
-    accentColor: "#1f6fac",  // Xanh đại dương đậm
-    goldColor: "#f5c542",    // Vàng đồng ấm (Wax seal / huy hiệu)
+    primaryColor: "#88cef4",
+    accentColor: "#1f6fac",
+    goldColor: "#f5c542",
   },
 };

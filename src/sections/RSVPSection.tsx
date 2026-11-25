@@ -19,7 +19,7 @@ export const RSVPSection: React.FC = () => {
     setErrorMessage('');
 
     if (!fullName.trim()) {
-      setErrorMessage('Vui lòng nhập Họ và tên của bạn.');
+      setErrorMessage('Vui lòng nhập Họ và tên của Anh/Chị/Bạn.');
       return;
     }
 
@@ -29,12 +29,11 @@ export const RSVPSection: React.FC = () => {
       fullName: fullName.trim(),
       phone: phone.trim(),
       attendance,
-      attendanceText: attendance === 'yes' ? 'Có, mình sẽ tham gia!' : 'Rất tiếc, mình không thể tham gia.',
+      attendanceText: attendance === 'yes' ? 'Có, mình sẽ tham gia!' : 'Rất tiếc, chưa thể sắp xếp.',
       message: message.trim(),
       submittedAt: new Date().toISOString(),
     };
 
-    // If Google Sheet Webhook is configured, POST to it
     if (rsvp.googleSheetWebhookUrl && rsvp.googleSheetWebhookUrl.trim() !== '') {
       try {
         await fetch(rsvp.googleSheetWebhookUrl, {
@@ -47,7 +46,6 @@ export const RSVPSection: React.FC = () => {
         console.warn('Google Sheet submission warning:', err);
       }
     } else {
-      // Local demo mode: Save to localStorage for demo persistence
       try {
         const existingData = JSON.parse(localStorage.getItem('eec_rsvp_responses') || '[]');
         existingData.push(payload);
@@ -57,7 +55,6 @@ export const RSVPSection: React.FC = () => {
       }
     }
 
-    // Small delay for UI smoothness
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -82,19 +79,19 @@ export const RSVPSection: React.FC = () => {
   };
 
   return (
-    <section id="rsvp" className="relative w-full py-16 px-4">
+    <section id="rsvp" className="relative w-full py-8 sm:py-12 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-10">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-alt mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-display mb-3">
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
             PHẢN HỒI THAM DỰ
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0a568b] tracking-tight font-display">
-            WILL YOU JOIN US?
+            XÁC NHẬN THAM DỰ
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-[#88cef4] to-[#0284c7] mx-auto mt-4 rounded-full"></div>
           <p className="text-[#0369a1] text-sm sm:text-base mt-3">
-            Để Ban Tổ Chức {club.shortName} chuẩn bị đón tiếp bạn chu đáo nhất, xin vui lòng xác nhận sự tham gia của bạn nhé!
+            Để Ban Tổ Chức {club.shortName} chuẩn bị đón tiếp chu đáo nhất, xin kính mời Anh/Chị/Bạn xác nhận thông tin tham dự dưới đây!
           </p>
         </div>
 
@@ -113,18 +110,18 @@ export const RSVPSection: React.FC = () => {
               </div>
 
               <h3 className="text-2xl font-bold text-[#0c4a6e] mb-2 font-display">
-                Cảm ơn bạn, {fullName}!
+                Cảm ơn Anh/Chị/Bạn, {fullName}!
               </h3>
 
               <p className="text-[#0369a1] text-sm sm:text-base max-w-md mx-auto mb-4 leading-relaxed">
                 {attendance === 'yes' ? (
                   <>
-                    🎉 Ban Tổ Chức đã ghi nhận xác nhận tham dự của bạn. Hẹn gặp bạn tại buổi tiệc sinh nhật của{' '}
+                    🎉 Ban Tổ Chức đã ghi nhận xác nhận tham dự của Anh/Chị/Bạn. Hẹn gặp tại buổi tiệc sinh nhật của{' '}
                     <strong className="text-[#0c4a6e]">{club.shortName}</strong>!
                   </>
                 ) : (
                   <>
-                    Rất tiếc vì bạn không thể tham gia lần này. Cảm ơn tình cảm và lời chúc quý báu của bạn dành cho{' '}
+                    Rất tiếc vì Anh/Chị/Bạn chưa thể sắp xếp tham dự lần này. Cảm ơn tình cảm và lời chúc quý báu dành cho{' '}
                     <strong className="text-[#0c4a6e]">{club.shortName}</strong>!
                   </>
                 )}
@@ -134,7 +131,7 @@ export const RSVPSection: React.FC = () => {
               <div className="p-3.5 rounded-xl bg-[#f0f9ff] border border-[#0284c7]/15 text-xs text-[#0369a1] max-w-sm mx-auto mb-6">
                 {!rsvp.googleSheetWebhookUrl ? (
                   <span>
-                    ℹ️ <em>Hệ thống đang chạy ở chế độ Demo UI. Bạn có thể kết nối Google Sheets trong file <code className="text-[#0c4a6e] font-semibold">eventConfig.ts</code> để lưu vào bảng tính thực tế.</em>
+                    ℹ️ <em>Hệ thống đang chạy ở chế độ thử nghiệm giao diện. Có thể kết nối Google Sheets trong tệp <code className="text-[#0c4a6e] font-semibold">eventConfig.ts</code> để lưu vào bảng tính thực tế.</em>
                   </span>
                 ) : (
                   <span className="text-emerald-700 font-medium">
@@ -145,7 +142,7 @@ export const RSVPSection: React.FC = () => {
 
               <button
                 onClick={handleReset}
-                className="px-6 py-2.5 rounded-xl text-xs font-bold font-alt bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0c4a6e] border border-[#0284c7]/20 transition-colors cursor-pointer"
+                className="px-6 py-2.5 rounded-xl text-xs font-bold font-display bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0c4a6e] border border-[#0284c7]/20 transition-colors cursor-pointer"
               >
                 GỬI PHẢN HỒI KHÁC
               </button>
@@ -154,7 +151,7 @@ export const RSVPSection: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
               {/* Full Name */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-alt mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-display mb-2">
                   Họ và Tên <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -166,15 +163,15 @@ export const RSVPSection: React.FC = () => {
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="Ví dụ: Nguyễn Văn An"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/90 border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all"
+                    placeholder="Họ và tên Anh/Chị/Bạn (VD: Nguyễn Văn An)"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all"
                   />
                 </div>
               </div>
 
               {/* Phone */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-alt mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-display mb-2">
                   Số điện thoại <span className="text-slate-400 text-[10px] font-normal">(Không bắt buộc)</span>
                 </label>
                 <div className="relative">
@@ -185,16 +182,16 @@ export const RSVPSection: React.FC = () => {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="Số điện thoại hoặc Zalo để nhận thông báo"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/90 border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all"
+                    placeholder="Số điện thoại hoặc Zalo để BTC liên hệ đón tiếp"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all"
                   />
                 </div>
               </div>
 
               {/* Attendance Options */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-alt mb-2.5">
-                  Bạn có thể tham dự cùng chúng mình không? <span className="text-rose-500">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-display mb-2.5">
+                  Anh/Chị/Bạn có thể tham dự cùng CLB không? <span className="text-rose-500">*</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <button
@@ -202,20 +199,20 @@ export const RSVPSection: React.FC = () => {
                     onClick={() => setAttendance('yes')}
                     className={`flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       attendance === 'yes'
-                        ? 'bg-[#88cef4]/25 border-[#0284c7] text-[#0c4a6e] shadow-md shadow-[#0284c7]/10'
-                        : 'bg-white/70 border-[#0284c7]/15 text-slate-500 hover:border-[#7dd3fc]'
+                        ? 'bg-[#e0f2fe] border-[#0284c7] text-[#0c4a6e] shadow-md shadow-[#0284c7]/10'
+                        : 'bg-white border-[#0284c7]/15 text-slate-500 hover:border-[#7dd3fc]'
                     }`}
                   >
                     <div
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
                         attendance === 'yes' ? 'border-[#0284c7] bg-[#0284c7]' : 'border-slate-300'
                       }`}
                     >
                       {attendance === 'yes' && <div className="w-2 h-2 rounded-full bg-white"></div>}
                     </div>
                     <div>
-                      <span className="text-sm font-bold block text-[#0c4a6e] font-alt">Có, mình sẽ tham gia!</span>
-                      <span className="text-[11px] text-[#0369a1]">YES! I'LL BE THERE</span>
+                      <span className="text-sm font-bold block text-[#0c4a6e] font-display">Có, sẽ tham gia!</span>
+                      <span className="text-[11px] text-[#0369a1]">Rất hân hạnh được chung vui</span>
                     </div>
                   </button>
 
@@ -225,19 +222,19 @@ export const RSVPSection: React.FC = () => {
                     className={`flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       attendance === 'no'
                         ? 'bg-rose-50 border-rose-400 text-rose-900 shadow-md shadow-rose-500/10'
-                        : 'bg-white/70 border-[#0284c7]/15 text-slate-500 hover:border-[#7dd3fc]'
+                        : 'bg-white border-[#0284c7]/15 text-slate-500 hover:border-[#7dd3fc]'
                     }`}
                   >
                     <div
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
                         attendance === 'no' ? 'border-rose-500 bg-rose-500' : 'border-slate-300'
                       }`}
                     >
                       {attendance === 'no' && <div className="w-2 h-2 rounded-full bg-white"></div>}
                     </div>
                     <div>
-                      <span className="text-sm font-bold block text-[#0c4a6e] font-alt">Rất tiếc, mình bận</span>
-                      <span className="text-[11px] text-slate-500">SORRY, CAN'T MAKE IT</span>
+                      <span className="text-sm font-bold block text-[#0c4a6e] font-display">Rất tiếc, chưa thể dự</span>
+                      <span className="text-[11px] text-slate-500">Hẹn dịp hội ngộ tiếp theo</span>
                     </div>
                   </button>
                 </div>
@@ -245,7 +242,7 @@ export const RSVPSection: React.FC = () => {
 
               {/* Message */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-alt mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0a568b] font-display mb-2">
                   Lời nhắn gửi đến CLB <span className="text-slate-400 text-[10px] font-normal">(Không bắt buộc)</span>
                 </label>
                 <div className="relative">
@@ -256,8 +253,8 @@ export const RSVPSection: React.FC = () => {
                     rows={3}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Gửi lời chúc mừng sinh nhật hoặc nhắn nhủ đến BTC..."
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/90 border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all resize-none"
+                    placeholder="Gửi lời chúc mừng sinh nhật hoặc nhắn nhủ đến Ban Tổ Chức..."
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-[#0284c7]/20 text-[#0a568b] placeholder:text-slate-400 focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7] text-sm transition-all resize-none"
                   ></textarea>
                 </div>
               </div>
@@ -274,7 +271,7 @@ export const RSVPSection: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-bold text-sm uppercase tracking-wider sn2-btn-primary font-alt cursor-pointer disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-bold text-sm uppercase tracking-wider sn2-btn-primary font-display cursor-pointer disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <>
@@ -284,7 +281,7 @@ export const RSVPSection: React.FC = () => {
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>GỬI XÁC NHẬN (SUBMIT RSVP)</span>
+                    <span>GỬI XÁC NHẬN THAM DỰ</span>
                   </>
                 )}
               </button>

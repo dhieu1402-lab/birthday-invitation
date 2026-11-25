@@ -2,7 +2,10 @@
 
 @layer base {
   :root {
-    /* Dynamic Blue + Ice-White Palette (from traothiep.vn) */
+    /* Khóa color-scheme sáng để không bị trình duyệt/hệ điều hành tự đảo màu */
+    color-scheme: light only;
+
+    /* Dynamic Blue + Ice-White Palette */
     --sn2-primary: #88cef4;
     --sn2-accent: #1f6fac;
     --sn2-navy: #041f3d;
@@ -10,23 +13,36 @@
     --sn2-muted: #0369a1;
     --sn2-gold: #f5c542;
 
-    /* Font Tokens */
-    --ff-display: 'Fredoka', 'Baloo 2', sans-serif;
-    --ff-alt: 'Baloo 2', 'Be Vietnam Pro', sans-serif;
-    --ff-body: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, sans-serif;
+    /* Thống nhất 3 Font chuẩn: Tiêu đề (Fredoka), Nội dung (Be Vietnam Pro), Chữ ký (Dancing Script) */
+    --ff-display: 'Fredoka', 'Be Vietnam Pro', sans-serif;
+    --ff-body: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
     --ff-script: 'Dancing Script', cursive;
-    --ff-digit: 'Orbitron', 'Be Vietnam Pro', sans-serif;
   }
 
   html {
+    color-scheme: light only;
     scroll-behavior: smooth;
     font-family: var(--ff-body);
+    background-color: #f0f9ff;
   }
 
   body {
+    color-scheme: light only;
     overflow-x: hidden;
-    background: linear-gradient(180deg, #f0f9ff, #e0f2fe, #f0f9ff 60%, #e0f2fe);
+    background-color: #f0f9ff;
+    background-image: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 45%, #f0f9ff 75%, #e0f2fe 100%);
     color: var(--sn2-ink);
+  }
+}
+
+/* Chống hệ điều hành Dark Mode ép đổi màu nền/chữ */
+@media (prefers-color-scheme: dark) {
+  :root,
+  html,
+  body {
+    color-scheme: light only;
+    background-color: #f0f9ff;
+    color: #0c4a6e;
   }
 }
 
@@ -45,12 +61,9 @@
   background: #0284c7;
 }
 
-/* Font Family Utilities */
+/* Font Family Utilities (chỉ 3 font thống nhất) */
 .font-display {
   font-family: var(--ff-display);
-}
-.font-alt {
-  font-family: var(--ff-alt);
 }
 .font-body {
   font-family: var(--ff-body);
@@ -58,30 +71,30 @@
 .font-script {
   font-family: var(--ff-script);
 }
-.font-digit {
-  font-family: var(--ff-digit);
-}
 
 /* Surface & Background Presets */
 .sn2-cover-bg {
-  background: linear-gradient(145deg, #041f3d, #0a3d6b 40%, #0d6b9e 75%, #1a9fd4);
+  background-color: #041f3d;
+  background-image: linear-gradient(145deg, #041f3d, #0a3d6b 40%, #0d6b9e 75%, #1a9fd4);
 }
 
 .sn2-hero-bg {
-  background: linear-gradient(180deg, #041f3d 0%, #0a3d6b 48%, #0d78b0 72%, #7dd3fc 90%, transparent 100%);
+  background-color: #041f3d;
+  background-image: linear-gradient(180deg, #041f3d 0%, #0a3d6b 50%, #0d78b0 78%, #7dd3fc 96%, transparent 100%);
 }
 
 .sn2-paper-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background-color: #ffffff;
+  background-image: linear-gradient(180deg, #ffffff 0%, #f8fcff 100%);
   border: 1px solid rgba(2, 132, 199, 0.18);
-  box-shadow: 10px 10px 0 rgba(14, 165, 233, 0.10), 0 16px 40px rgba(3, 52, 105, 0.10);
+  box-shadow: 8px 8px 0 rgba(14, 165, 233, 0.10), 0 14px 36px rgba(3, 52, 105, 0.08);
+  color: #0c4a6e;
 }
 
 .sn2-scoreboard {
-  background: linear-gradient(160deg, #041f3d, #0a3d6b);
-  box-shadow: 0 20px 48px rgba(3, 52, 105, 0.30), inset 0 0 0 3px rgba(125, 211, 252, 0.18);
+  background-color: #041f3d;
+  background-image: linear-gradient(160deg, #041f3d, #0a3d6b);
+  box-shadow: 0 18px 42px rgba(3, 52, 105, 0.28), inset 0 0 0 3px rgba(125, 211, 252, 0.20);
 }
 
 .sn2-gold-seal {
@@ -90,19 +103,20 @@
 }
 
 .sn2-btn-primary {
-  background: linear-gradient(135deg, #0284c7, #0ea5e9, #38bdf8);
+  background-color: #0284c7;
+  background-image: linear-gradient(135deg, #0284c7, #0ea5e9, #38bdf8);
   color: #ffffff;
-  box-shadow: 0 14px 32px rgba(2, 132, 199, 0.38);
+  box-shadow: 0 12px 28px rgba(2, 132, 199, 0.35);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .sn2-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 38px rgba(2, 132, 199, 0.48);
+  box-shadow: 0 16px 34px rgba(2, 132, 199, 0.45);
 }
 
 .sn2-badge {
-  background: rgba(224, 242, 254, 0.85);
-  border: 1px solid rgba(2, 132, 199, 0.22);
+  background-color: #e0f2fe;
+  border: 1px solid rgba(2, 132, 199, 0.24);
   color: #0284c7;
 }
 

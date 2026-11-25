@@ -14,7 +14,6 @@ export const FooterSection: React.FC = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !firedRef.current) {
             firedRef.current = true;
-            // Gentle celebratory sparkles in Dynamic Blue & Gold palette
             confetti({
               particleCount: 70,
               spread: 80,
@@ -41,7 +40,7 @@ export const FooterSection: React.FC = () => {
   return (
     <footer
       ref={footerRef}
-      className="relative w-full pt-16 pb-20 sm:pb-14 px-4 overflow-hidden bg-gradient-to-b from-[#041f3d] via-[#0a3d6b] to-[#041f3d] text-white"
+      className="relative w-full pt-16 pb-20 sm:pb-14 px-4 overflow-hidden bg-[#041f3d] bg-gradient-to-b from-[#041f3d] via-[#0a3d6b] to-[#041f3d] text-white"
     >
       {/* Decorative ambient lighting */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-48 bg-gradient-to-t from-[#38bdf8]/15 via-[#f5c542]/10 to-transparent blur-3xl pointer-events-none"></div>
@@ -53,7 +52,7 @@ export const FooterSection: React.FC = () => {
         </div>
 
         {/* Headline */}
-        <h3 className="text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-[#7dd3fc] font-alt mb-2">
+        <h3 className="text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-[#7dd3fc] font-display mb-2">
           {thanks.headline}
         </h3>
 
@@ -67,27 +66,32 @@ export const FooterSection: React.FC = () => {
           {thanks.message}
         </p>
         <p className="text-[#bae6fd]/85 text-xs sm:text-sm max-w-lg mx-auto font-light italic mb-8">
-          "{thanks.subMessage}"
+          “{thanks.subMessage}”
         </p>
 
-        {/* Club Logo and Details */}
+        {/* Club Logo, Institution & Optional Slogan on smaller line */}
         <div className="flex flex-col items-center justify-center pt-8 border-t border-white/15">
-          <div className="p-2.5 rounded-2xl bg-white/95 shadow-lg mb-3">
+          <div className="p-2.5 rounded-2xl bg-white shadow-lg mb-3">
             <img
               src={club.logo}
               alt={club.name}
               className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
             />
           </div>
-          <h4 className="text-base font-bold text-white tracking-wide font-alt">
+          <h4 className="text-base sm:text-lg font-bold text-white tracking-wide font-display">
             {club.name} ({club.shortName})
           </h4>
-          <p className="text-xs text-[#bae6fd]/80 mt-1">
-            {club.subTitle}
+          <p className="text-xs text-[#bae6fd]/85 mt-1">
+            {club.faculty} • {club.university}
           </p>
+          {club.slogan && club.slogan.trim() !== '' && (
+            <p className="text-[11px] text-[#7dd3fc]/80 italic mt-1">
+              Khẩu hiệu: “{club.slogan}”
+            </p>
+          )}
 
           <p className="text-[#bae6fd]/60 text-xs mt-6">
-            Copyright © {thanks.copyrightYear} {club.name}. All rights reserved.
+            © {thanks.copyrightYear} {club.name} ({club.shortName}) • {club.university}
           </p>
         </div>
 
@@ -96,7 +100,7 @@ export const FooterSection: React.FC = () => {
           <button
             onClick={scrollToTop}
             aria-label="Cuộn lên đầu trang"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold font-alt text-[#041f3d] bg-[#88cef4] hover:bg-[#7dd3fc] transition-all shadow-lg group cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold font-display text-[#041f3d] bg-[#88cef4] hover:bg-[#7dd3fc] transition-all shadow-lg group cursor-pointer"
           >
             <ArrowUp className="w-3.5 h-3.5 text-[#041f3d] group-hover:-translate-y-0.5 transition-transform" />
             <span>Về đầu trang</span>

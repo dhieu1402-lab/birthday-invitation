@@ -37,10 +37,10 @@ export const MusicControl: React.FC<MusicControlProps> = ({ isOpened }) => {
       <button
         onClick={handleToggle}
         aria-label={isPlaying ? 'Tắt nhạc nền' : 'Bật nhạc nền'}
-        className={`group relative flex items-center gap-2.5 px-3.5 py-2 rounded-full border backdrop-blur-md transition-all duration-300 shadow-lg font-alt cursor-pointer ${
+        className={`group relative flex items-center gap-2.5 px-3.5 py-2 rounded-full border backdrop-blur-md transition-all duration-300 shadow-lg font-display cursor-pointer ${
           isPlaying
             ? 'bg-[#0284c7] border-[#38bdf8] text-white shadow-[#0284c7]/35'
-            : 'bg-white/95 border-[#0284c7]/25 text-[#0284c7] hover:bg-[#f0f9ff] shadow-[#033469]/15'
+            : 'bg-white border-[#0284c7]/25 text-[#0284c7] hover:bg-[#f0f9ff] shadow-[#033469]/15'
         }`}
       >
         {isPlaying ? (
