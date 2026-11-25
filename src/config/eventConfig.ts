@@ -218,7 +218,7 @@ export const eventConfig: EventConfig = {
   ],
 
   rsvp: {
-    googleSheetWebhookUrl: "",
+    googleSheetWebhookUrl: "https://script.google.com/macros/s/AKfycbz5XW4Yhn_TqjnQyGX5yp1hnEGiXWbIguqjycQU39j4H1SM3H4sck9gjsaFR_zuF_pN/exec",
     googleFormDirectUrl: "",
     contactHotline: "0365.140.206",
   },

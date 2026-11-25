@@ -169,7 +169,7 @@ Mặc định website hoạt động ở chế độ Demo UI và lưu trữ tạ
    }
    ```
 4. Chọn **Triển khai** (Deploy) → **Tùy chọn triển khai mới** (New deployment) → Loại: **Ứng dụng web** (Web app) → Ai có quyền truy cập: **Bất kỳ ai** (Anyone).
-5. Sao chép URL triển khai và dán vào:
+5. Sao chép URL triển khai và dán vào file `src/config/eventConfig.ts`:
    ```typescript
    rsvp: {
      googleSheetWebhookUrl: "DÁN_URL_GOOGLE_APPS_SCRIPT_VÀO_ĐÂY",

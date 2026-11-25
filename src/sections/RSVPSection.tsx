@@ -53,16 +53,21 @@ export const RSVPSection: React.FC = () => {
       submittedAt: new Date().toISOString(),
     };
 
-    if (rsvp.googleSheetWebhookUrl && rsvp.googleSheetWebhookUrl.trim() !== '') {
+    const webhookUrl = rsvp.googleSheetWebhookUrl?.trim() ?? '';
+
+    if (webhookUrl !== '') {
       try {
-        await fetch(rsvp.googleSheetWebhookUrl, {
+        await fetch(webhookUrl, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload),
         });
       } catch (err) {
         console.warn('Google Sheet submission warning:', err);
+        setIsSubmitting(false);
+        setErrorMessage('Không thể kết nối máy chủ lưu danh sách. Vui lòng kiểm tra mạng và thử lại.');
+        return;
       }
     } else {
       try {
@@ -135,16 +140,8 @@ export const RSVPSection: React.FC = () => {
                 )}
               </p>
 
-              <div className="p-3 rounded-xl bg-[#f0f9ff] border border-[#0284c7]/15 text-xs text-[#0369a1] max-w-sm mx-auto mb-5">
-                {!rsvp.googleSheetWebhookUrl ? (
-                  <span>
-                    ℹ️ <em>Chế độ thử nghiệm giao diện (có thể kết nối Google Sheets trong <code className="text-[#0c4a6e] font-semibold">eventConfig.ts</code>).</em>
-                  </span>
-                ) : (
-                  <span className="text-emerald-700 font-medium">
-                    ✓ Phản hồi đã được lưu vào danh sách của Ban Tổ Chức.
-                  </span>
-                )}
+              <div className="p-3 rounded-xl bg-[#f0f9ff] border border-[#0284c7]/15 text-xs text-emerald-700 font-medium max-w-sm mx-auto mb-5">
+                ✓ Phản hồi đã được lưu vào danh sách của Ban Tổ Chức.
               </div>
 
               <button
