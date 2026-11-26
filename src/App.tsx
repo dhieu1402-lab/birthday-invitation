@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { HeroSection } from './sections/HeroSection';
 import { InvitationSection } from './sections/InvitationSection';
 import { EventInfoSection } from './sections/EventInfoSection';
@@ -13,15 +13,72 @@ import { SectionDivider } from './components/SectionDivider';
 
 export const App: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   const handleOpenInvitation = () => {
     setIsOpened(true);
   };
 
+  useEffect(() => {
+    if (!isOpened) return;
+
+    let rafId: number | null = null;
+
+    const updateScrollMotion = () => {
+      rafId = null;
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? Math.min(1, Math.max(0, scrollY / maxScroll)) : 0;
+
+      if (rootRef.current) {
+        rootRef.current.style.setProperty('--scroll-y', `${scrollY}px`);
+      }
+      if (progressBarRef.current) {
+        progressBarRef.current.style.transform = `scaleX(${progress})`;
+      }
+    };
+
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(updateScrollMotion);
+      }
+    };
+
+    updateScrollMotion();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
+  }, [isOpened]);
+
   return (
-    <div className="min-h-screen bg-[#f0f9ff] bg-gradient-to-b from-[#f0f9ff] via-[#e0f2fe] to-[#f0f9ff] text-[#0c4a6e] flex flex-col font-body selection:bg-[#88cef4]/40 selection:text-[#041f3d]">
-      {/* Subtle Sky-Blue Pattern */}
-      <div className="fixed inset-0 bg-[radial-gradient(#7dd3fc_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none"></div>
+    <div
+      ref={rootRef}
+      className="min-h-screen bg-[#f0f9ff] bg-gradient-to-b from-[#f0f9ff] via-[#e0f2fe] to-[#f0f9ff] text-[#0c4a6e] flex flex-col font-body selection:bg-[#88cef4]/40 selection:text-[#041f3d]"
+    >
+      {/* Scroll Progress Bar */}
+      {isOpened && (
+        <div
+          aria-hidden="true"
+          className="fixed top-0 inset-x-0 z-50 h-1 bg-[#e0f2fe]/60 pointer-events-none"
+        >
+          <div
+            ref={progressBarRef}
+            className="h-full w-full origin-left bg-gradient-to-r from-[#88cef4] via-[#0284c7] to-[#f5c542] transition-transform duration-75 ease-out"
+            style={{ transform: 'scaleX(0)' }}
+          />
+        </div>
+      )}
+
+      {/* Subtle Sky-Blue Pattern with Scroll Parallax */}
+      <div className="fixed inset-0 bg-[radial-gradient(#7dd3fc_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none sn2-parallax-dots"></div>
 
       {/* Persistent Floating Controls */}
       <MusicControl isOpened={isOpened} />

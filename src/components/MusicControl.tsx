@@ -12,7 +12,10 @@ export const MusicControl: React.FC<MusicControlProps> = ({ isOpened }) => {
   const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
-    birthdayAudioPlayer.init(eventConfig.music.audioUrl);
+    birthdayAudioPlayer.init(
+      eventConfig.music.audioUrl,
+      eventConfig.music.useWebAudioSynthesizerFallback
+    );
   }, []);
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, Sparkles, BellRing } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
+import { RevealOnScroll } from './RevealOnScroll';
 
 interface TimeLeft {
   days: number;
@@ -65,7 +66,7 @@ export const Countdown: React.FC = () => {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4">
+    <RevealOnScroll variant="scale" className="w-full max-w-4xl mx-auto px-4">
       {timeLeft.isExpired ? (
         <div className="sn2-paper-card rounded-3xl p-8 text-center">
           <div className="inline-flex p-4 rounded-full bg-[#e0f2fe] text-[#0284c7] mb-4 animate-bounce border border-[#7dd3fc]">
@@ -117,18 +118,19 @@ export const Countdown: React.FC = () => {
           {/* 4 White Digit Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-5 max-w-2xl mx-auto">
             {timeUnits.map((unit, index) => (
-              <div
-                key={index}
-                className="relative group flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl bg-white border border-[#0284c7]/18 shadow-[6px_6px_0_rgba(14,165,233,0.10)] hover:border-[#38bdf8] hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0c4a6e] font-display tracking-tight tabular-nums">
-                  {unit.value}
-                </span>
+              <RevealOnScroll key={index} variant="up" delayMs={index * 80}>
+                <div
+                  className="relative group flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl bg-white border border-[#0284c7]/18 shadow-[6px_6px_0_rgba(14,165,233,0.10)] hover:border-[#38bdf8] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0c4a6e] font-display tracking-tight tabular-nums">
+                    {unit.value}
+                  </span>
 
-                <span className="text-sm font-bold text-[#0369a1] font-display mt-1">
-                  {unit.label}
-                </span>
-              </div>
+                  <span className="text-sm font-bold text-[#0369a1] font-display mt-1">
+                    {unit.label}
+                  </span>
+                </div>
+              </RevealOnScroll>
             ))}
           </div>
 
@@ -146,6 +148,6 @@ export const Countdown: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </RevealOnScroll>
   );
 };

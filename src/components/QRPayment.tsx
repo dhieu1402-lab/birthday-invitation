@@ -11,6 +11,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
+import { RevealOnScroll } from './RevealOnScroll';
 
 export const QRPayment: React.FC = () => {
   const { bank } = eventConfig;
@@ -43,7 +44,8 @@ export const QRPayment: React.FC = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6 sm:py-8">
-      <div className="relative sn2-paper-card rounded-3xl p-6 sm:p-10 overflow-hidden">
+      <RevealOnScroll variant="up">
+        <div className="relative sn2-paper-card rounded-3xl p-6 sm:p-10 overflow-hidden">
         {/* Corner Accents */}
         <div className="absolute top-3 left-3 w-7 h-7 border-t-2 border-l-2 border-[#7dd3fc] rounded-tl-lg pointer-events-none"></div>
         <div className="absolute top-3 right-3 w-7 h-7 border-t-2 border-r-2 border-[#7dd3fc] rounded-tr-lg pointer-events-none"></div>
@@ -238,7 +240,8 @@ export const QRPayment: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </RevealOnScroll>
 
       {/* QR Zoom Modal */}
       {isQrZoomed && (

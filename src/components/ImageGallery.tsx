@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Heart } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
+import { RevealOnScroll } from './RevealOnScroll';
 
 export const ImageGallery: React.FC = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
@@ -44,7 +45,7 @@ export const ImageGallery: React.FC = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-6 sm:py-8">
-      <div className="text-center mb-10">
+      <RevealOnScroll variant="up" className="text-center mb-10">
         <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-display mb-3">
           <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
           HÀNH TRÌNH ĐÁNG NHỚ
@@ -56,16 +57,16 @@ export const ImageGallery: React.FC = () => {
         <p className="text-[#0369a1] text-sm sm:text-base max-w-xl mx-auto mt-3">
           Những dấu mốc thanh xuân, nụ cười rạng rỡ và tình cảm gắn bó qua các thế hệ thành viên {eventConfig.club.shortName}
         </p>
-      </div>
+      </RevealOnScroll>
 
       {/* Responsive Modern Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
         {memories.map((mem, index) => (
-          <div
-            key={mem.id}
-            onClick={() => handleOpenModal(index)}
-            className="group relative cursor-pointer overflow-hidden rounded-2xl bg-white border border-[#0284c7]/18 shadow-[8px_8px_0_rgba(14,165,233,0.10)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[10px_10px_0_rgba(2,132,199,0.22)] hover:border-[#38bdf8]"
-          >
+          <RevealOnScroll key={mem.id} variant="up" delayMs={(index % 4) * 80}>
+            <div
+              onClick={() => handleOpenModal(index)}
+              className="group relative cursor-pointer overflow-hidden rounded-2xl bg-white border border-[#0284c7]/18 shadow-[8px_8px_0_rgba(14,165,233,0.10)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[10px_10px_0_rgba(2,132,199,0.22)] hover:border-[#38bdf8]"
+            >
             {/* Image Container */}
             <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden bg-[#e0f2fe]">
               <img
@@ -102,7 +103,8 @@ export const ImageGallery: React.FC = () => {
                 </p>
               </div>
             </div>
-          </div>
+            </div>
+          </RevealOnScroll>
         ))}
       </div>
 

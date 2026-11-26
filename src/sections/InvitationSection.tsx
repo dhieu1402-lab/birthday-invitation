@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
+import { RevealOnScroll } from '../components/RevealOnScroll';
 
 export const InvitationSection: React.FC = () => {
   const { club, event, invitation } = eventConfig;
@@ -10,7 +11,7 @@ export const InvitationSection: React.FC = () => {
       {/* Subtle ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-gradient-to-tr from-[#88cef4]/25 via-[#bae6fd]/20 to-[#f5c542]/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div className="relative max-w-4xl mx-auto">
+      <RevealOnScroll variant="scale" className="relative max-w-4xl mx-auto">
         {/* Paper Card Invitation Frame */}
         <div className="relative sn2-paper-card rounded-3xl p-7 sm:p-12 text-center overflow-hidden">
           {/* Sky-Blue Corner Accents */}
@@ -77,7 +78,7 @@ export const InvitationSection: React.FC = () => {
             </p>
           </div>
         </div>
-      </div>
+      </RevealOnScroll>
     </section>
   );
 };

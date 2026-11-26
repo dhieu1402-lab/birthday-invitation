@@ -17,8 +17,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened, onOpen }) =>
 
   return (
     <section className="relative min-h-[85vh] sm:min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 pb-20 overflow-hidden sn2-hero-bg">
-      {/* Ambient sky-blue glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] sm:w-[650px] h-[360px] sm:h-[650px] bg-gradient-to-tr from-[#38bdf8]/25 via-[#88cef4]/15 to-[#f5c542]/10 rounded-full blur-3xl pointer-events-none"></div>
+      {/* Ambient sky-blue glow with subtle scroll parallax */}
+      <div
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] sm:w-[650px] h-[360px] sm:h-[650px] bg-gradient-to-tr from-[#38bdf8]/25 via-[#88cef4]/15 to-[#f5c542]/10 rounded-full blur-3xl pointer-events-none"
+        style={{ transform: 'translate3d(0, calc(var(--scroll-y, 0px) * 0.22), 0)' }}
+      ></div>
 
       {/* Floating Sparkles */}
       <div className="absolute top-16 left-8 animate-float-slow text-[#f5c542] opacity-80">

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { Heart, ArrowUp } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
+import { RevealOnScroll } from '../components/RevealOnScroll';
 
 export const FooterSection: React.FC = () => {
   const { thanks, club } = eventConfig;
@@ -45,7 +46,7 @@ export const FooterSection: React.FC = () => {
       {/* Decorative ambient lighting */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-48 bg-gradient-to-t from-[#38bdf8]/15 via-[#f5c542]/10 to-transparent blur-3xl pointer-events-none"></div>
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
+      <RevealOnScroll variant="up" className="max-w-4xl mx-auto text-center relative z-10">
         {/* Heart Icon */}
         <div className="inline-flex p-3 rounded-full bg-white/10 text-[#f5c542] border border-white/25 mb-4 animate-float-slow">
           <Heart className="w-6 h-6 fill-[#f5c542]/40" />
@@ -106,7 +107,7 @@ export const FooterSection: React.FC = () => {
             <span>Về đầu trang</span>
           </button>
         </div>
-      </div>
+      </RevealOnScroll>
     </footer>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { eventConfig } from '../config/eventConfig';
+import { RevealOnScroll } from '../components/RevealOnScroll';
 
 type AttendanceStatus = 'yes' | 'no' | 'maybe';
 
@@ -105,7 +106,7 @@ export const RSVPSection: React.FC = () => {
 
   return (
     <section id="rsvp" className="relative w-full py-8 sm:py-12 px-4">
-      <div className="max-w-lg mx-auto">
+      <RevealOnScroll variant="scale" className="max-w-lg mx-auto">
         {/* Clean Paper Card matching reference */}
         <div className="relative bg-white rounded-3xl p-7 sm:p-10 border border-[#0284c7]/15 shadow-[12px_12px_0_rgba(136,206,244,0.35),0_16px_40px_rgba(3,52,105,0.08)] overflow-hidden">
           {/* Minimal 2 corner accents: Top-Left & Bottom-Right */}
@@ -288,7 +289,7 @@ export const RSVPSection: React.FC = () => {
             </form>
           )}
         </div>
-      </div>
+      </RevealOnScroll>
     </section>
   );
 };

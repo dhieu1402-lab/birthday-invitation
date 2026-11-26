@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, Clock, MapPin, Navigation, Sparkles, Building2, ListChecks } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
+import { RevealOnScroll } from '../components/RevealOnScroll';
 
 export const EventInfoSection: React.FC = () => {
   const { event } = eventConfig;
@@ -43,7 +44,7 @@ export const EventInfoSection: React.FC = () => {
   return (
     <section id="event-info" className="relative w-full py-8 sm:py-12 px-4">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-10">
+        <RevealOnScroll variant="up" className="text-center mb-10">
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-display mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#0284c7]" />
             THỜI GIAN & ĐỊA ĐIỂM
@@ -55,42 +56,43 @@ export const EventInfoSection: React.FC = () => {
           <p className="text-[#0369a1] text-sm sm:text-base max-w-lg mx-auto mt-3">
             Những thông tin quan trọng để Anh/Chị/Bạn sẵn sàng tham dự đêm tiệc trọn vẹn nhất
           </p>
-        </div>
+        </RevealOnScroll>
 
         {/* 4 Info Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-10">
           {infoCards.map((card, index) => {
             const Icon = card.icon;
             return (
-              <div
-                key={index}
-                className="relative group rounded-3xl p-6 sm:p-7 sn2-paper-card transition-all duration-300 hover:-translate-y-1 hover:border-[#38bdf8]"
-              >
-                <div className="flex items-start gap-4">
-                  <div className={`p-3.5 rounded-2xl ${card.iconBg} border border-[#0284c7]/15 ${card.iconColor} shadow-sm flex-shrink-0`}>
-                    <Icon className="w-6 h-6" />
-                  </div>
+              <RevealOnScroll key={index} variant="up" delayMs={index * 90}>
+                <div
+                  className="relative group h-full rounded-3xl p-6 sm:p-7 sn2-paper-card transition-all duration-300 hover:-translate-y-1 hover:border-[#38bdf8]"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`p-3.5 rounded-2xl ${card.iconBg} border border-[#0284c7]/15 ${card.iconColor} shadow-sm flex-shrink-0`}>
+                      <Icon className="w-6 h-6" />
+                    </div>
 
-                  <div className="flex-1">
-                    <span className="text-xs uppercase tracking-wider text-[#0284c7] font-bold font-display block mb-1">
-                      {card.title}
-                    </span>
-                    <h3 className="text-lg sm:text-xl font-bold text-[#0c4a6e] leading-snug font-display">
-                      {card.value}
-                    </h3>
-                    <p className="text-[#0369a1] text-xs mt-1 font-normal">
-                      {card.subtitle}
-                    </p>
+                    <div className="flex-1">
+                      <span className="text-xs uppercase tracking-wider text-[#0284c7] font-bold font-display block mb-1">
+                        {card.title}
+                      </span>
+                      <h3 className="text-lg sm:text-xl font-bold text-[#0c4a6e] leading-snug font-display">
+                        {card.value}
+                      </h3>
+                      <p className="text-[#0369a1] text-xs mt-1 font-normal">
+                        {card.subtitle}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </RevealOnScroll>
             );
           })}
         </div>
 
         {/* Timeline Chương Trình Dự Kiến */}
         {event.timeline && event.timeline.length > 0 && (
-          <div className="sn2-paper-card rounded-3xl p-6 sm:p-9 mb-10">
+          <RevealOnScroll variant="scale" className="sn2-paper-card rounded-3xl p-6 sm:p-9 mb-10">
             <div className="text-center mb-8">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase sn2-badge font-display mb-2">
                 <ListChecks className="w-3.5 h-3.5 text-[#0284c7]" />
@@ -106,7 +108,7 @@ export const EventInfoSection: React.FC = () => {
 
             <div className="relative max-w-3xl mx-auto pl-6 sm:pl-8 space-y-6 before:content-[''] before:absolute before:left-2.5 sm:before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-gradient-to-b before:from-[#88cef4] before:via-[#0284c7] before:to-[#7dd3fc]">
               {event.timeline.map((item, idx) => (
-                <div key={idx} className="relative group">
+                <RevealOnScroll key={idx} variant="right" delayMs={idx * 90} className="relative group">
                   {/* Timeline Node */}
                   <div className="absolute -left-[22px] sm:-left-[25px] top-1.5 w-4 h-4 rounded-full bg-[#f5c542] border-2 border-white shadow ring-2 ring-[#0284c7]/30 group-hover:scale-110 transition-transform" />
 
@@ -124,14 +126,14 @@ export const EventInfoSection: React.FC = () => {
                       {item.description}
                     </p>
                   </div>
-                </div>
+                </RevealOnScroll>
               ))}
             </div>
-          </div>
+          </RevealOnScroll>
         )}
 
         {/* Get Directions Button */}
-        <div className="text-center">
+        <RevealOnScroll variant="up" delayMs={120} className="text-center">
           <a
             href={event.googleMapsUrl}
             target="_blank"
@@ -141,7 +143,7 @@ export const EventInfoSection: React.FC = () => {
             <Navigation className="w-5 h-5 text-[#e0f7ff] animate-pulse" />
             <span>XEM CHỈ ĐƯỜNG TRÊN BẢN ĐỒ</span>
           </a>
-        </div>
+        </RevealOnScroll>
       </div>
     </section>
   );
