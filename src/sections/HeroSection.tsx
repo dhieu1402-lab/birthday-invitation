@@ -57,15 +57,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened, onOpen }) =>
         </h2>
 
         {/* Main Event Title with 2 balanced lines for edition */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight font-display mb-4 leading-tight drop-shadow-[3px_4px_0_rgba(1,54,98,0.45)]">
+        <h1
+          className={`text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight font-display leading-tight drop-shadow-[3px_4px_0_rgba(1,54,98,0.45)] ${
+            event.theme && event.theme.trim() !== '' ? 'mb-4' : 'mb-8'
+          }`}
+        >
           <span className="block">{event.editionLine1}</span>
           <span className="block text-[#e0f7ff] mt-1">{event.editionLine2}</span>
         </h1>
 
-        {/* Theme */}
-        <p className="text-xl sm:text-2xl font-bold text-[#7dd3fc] font-script mb-8 drop-shadow-sm">
-          “{event.theme}”
-        </p>
+        {/* Theme (optional) */}
+        {event.theme && event.theme.trim() !== '' && (
+          <p className="text-xl sm:text-2xl font-bold text-[#7dd3fc] font-script mb-8 drop-shadow-sm">
+            “{event.theme}”
+          </p>
+        )}
 
         {/* Quick Start-Time Reminder & Venue Badges */}
         <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm text-white mb-10 font-display">

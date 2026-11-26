@@ -99,7 +99,7 @@ export const eventConfig: EventConfig = {
     faculty: "KHOA KINH TẾ VÀ QUẢN LÝ XÂY DỰNG",
     name: "CLB KỸ SƯ KINH TẾ",
     shortName: "CEM - EEC",
-    slogan: "Cùng nhau học hỏi", // Để "" nếu muốn ẩn hoàn toàn khẩu hiệu
+    slogan: "", // Để "" nếu muốn ẩn hoàn toàn khẩu hiệu
     logo: "./images/logo.png",
     establishedYear: 2008,
     organizer: "Ban Chủ Nhiệm CLB Kỹ Sư Kinh Tế (CEM - EEC)",
@@ -107,7 +107,7 @@ export const eventConfig: EventConfig = {
 
   event: {
     title: "LỄ KỶ NIỆM SINH NHẬT CLB KỸ SƯ KINH TẾ",
-    theme: "Dấu Ấn Tự Hào – Vững Bước Vươn Xa",
+    theme: "",
     editionLine1: "SINH NHẬT",
     editionLine2: "KỶ NIỆM 18 NĂM",
     dateDisplay: "Thứ Bảy, 12/12/2026",
