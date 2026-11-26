@@ -48,7 +48,7 @@ export const RevealOnScroll: React.FC<RevealOnScrollProps> = ({
           }
         }
       },
-      { threshold: 0.12, rootMargin: '0px 0px -36px 0px' }
+      { threshold: 0.02, rootMargin: '0px 0px -8px 0px' }
     );
 
     observer.observe(node);

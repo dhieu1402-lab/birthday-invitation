@@ -18,6 +18,7 @@ export const App: React.FC = () => {
 
   const handleOpenInvitation = () => {
     setIsOpened(true);
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   useEffect(() => {

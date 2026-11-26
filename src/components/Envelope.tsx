@@ -100,24 +100,26 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
         </div>
 
         {/* 3D Envelope Card Structure */}
-        <div className="relative w-full aspect-[16/11] max-w-[420px] mx-auto perspective-1000">
+        <div className="relative w-full aspect-[16/11] max-w-[420px] mx-auto perspective-1000 mt-2">
           {/* Card Sliding Out Animation */}
           <div
-            className={`absolute inset-x-4 top-2 bottom-6 bg-white rounded-2xl p-5 shadow-2xl border border-[#7dd3fc]/50 transition-all duration-1000 ease-out flex flex-col items-center justify-between text-[#0c4a6e] ${
-              isOpenAnimation ? '-translate-y-28 opacity-100 scale-102 shadow-[#0284c7]/30' : 'translate-y-2 opacity-90'
+            className={`absolute inset-x-4 top-2 bottom-6 bg-white rounded-2xl p-4 sm:p-5 shadow-2xl border border-[#7dd3fc]/50 transition-all duration-1000 ease-out flex flex-col items-center justify-between text-[#0c4a6e] ${
+              isOpenAnimation
+                ? 'z-30 -translate-y-12 sm:-translate-y-16 opacity-100 scale-102 shadow-[#0284c7]/30'
+                : 'z-0 translate-y-2 opacity-90'
             }`}
           >
-            <div className="w-full flex items-center justify-between border-b border-[#0284c7]/15 pb-2">
-              <span className="text-[10px] uppercase tracking-widest font-bold text-[#0284c7] font-display">
+            <div className="w-full flex items-center justify-between gap-2 border-b border-[#0284c7]/15 pb-2">
+              <span className="text-[10px] uppercase tracking-widest font-bold text-[#0284c7] font-display flex-shrink-0">
                 {club.shortName}
               </span>
-              <span className="text-[10px] font-semibold text-[#0369a1]">
+              <span className="text-[10px] font-semibold text-[#0369a1] text-right">
                 Bắt đầu: {event.startTime} • {event.dateDisplay}
               </span>
             </div>
 
-            <div className="text-center my-auto">
-              <p className="font-script text-3xl sm:text-4xl text-[#0c4a6e] font-bold">
+            <div className="text-center my-auto px-1">
+              <p className="font-script text-2xl sm:text-4xl text-[#0c4a6e] font-bold leading-snug">
                 Trân Trọng Kính Mời!
               </p>
               <p className="text-xs text-[#0369a1] mt-1 font-medium">
@@ -129,7 +131,7 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
           </div>
 
           {/* Envelope Pocket Base */}
-          <div className="absolute inset-0 rounded-2xl bg-white/12 backdrop-blur-xl border border-white/30 shadow-[0_24px_60px_rgba(4,31,61,0.45)] overflow-hidden flex flex-col justify-end p-6">
+          <div className="absolute inset-0 z-10 rounded-2xl bg-white/12 backdrop-blur-xl border border-white/30 shadow-[0_24px_60px_rgba(4,31,61,0.45)] overflow-hidden flex flex-col justify-end p-6">
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[#041f3d]/70 to-transparent"></div>
               <div className="absolute bottom-0 inset-x-0 h-1/2 border-t border-white/25 bg-gradient-to-b from-[#0a3d6b]/60 to-[#041f3d]/85"></div>
