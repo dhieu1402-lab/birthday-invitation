@@ -125,8 +125,8 @@ event: {
   bank: {
     bankName: "MBBank (Ngân hàng TMCP Quân đội)",
     bankCode: "MB",
-    accountName: "DINH TRUNG HIEU",
-    accountNumber: "36514022006",
+    accountName: "DO THANH PHUONG",
+    accountNumber: "0329169499",
     defaultAmount: "", // Số tiền mặc định (hoặc để trống)
     transferMessage: "CHUC MUNG SINH NHAT EEC",
     qrImage: "./qr/qr-chuyenkhoan.jpg",

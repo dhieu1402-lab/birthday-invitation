@@ -226,8 +226,8 @@ export const eventConfig: EventConfig = {
   bank: {
     bankName: "MBBank (Ngân hàng TMCP Quân đội)",
     bankCode: "MB",
-    accountName: "DINH TRUNG HIEU",
-    accountNumber: "36514022006",
+    accountName: "DO THANH PHUONG",
+    accountNumber: "0329169499",
     defaultAmount: "",
     transferMessage: "CHUC MUNG SINH NHAT EEC",
     qrImage: "./qr/qr-chuyenkhoan.jpg",
