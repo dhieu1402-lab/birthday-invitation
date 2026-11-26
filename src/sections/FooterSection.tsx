@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { Heart, ArrowUp } from 'lucide-react';
+import { Heart, ArrowUp, Phone, Mail } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
 import { RevealOnScroll } from '../components/RevealOnScroll';
 
 export const FooterSection: React.FC = () => {
-  const { thanks, club } = eventConfig;
+  const { thanks, club, rsvp } = eventConfig;
   const footerRef = useRef<HTMLElement>(null);
   const firedRef = useRef(false);
 
@@ -90,6 +90,41 @@ export const FooterSection: React.FC = () => {
               Khẩu hiệu: “{club.slogan}”
             </p>
           )}
+
+          {/* Contact Info Links */}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+            {rsvp.contactHotline && (
+              <a
+                href={`tel:${rsvp.contactHotline.replace(/[^\d+]/g, '')}`}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs text-[#e0f2fe] transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#7dd3fc]" />
+                <span>Hotline: {rsvp.contactHotline}</span>
+              </a>
+            )}
+            {rsvp.contactEmail && (
+              <a
+                href={`mailto:${rsvp.contactEmail}`}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs text-[#e0f2fe] transition-colors"
+              >
+                <Mail className="w-3.5 h-3.5 text-[#7dd3fc]" />
+                <span>{rsvp.contactEmail}</span>
+              </a>
+            )}
+            {rsvp.facebookUrl && (
+              <a
+                href={rsvp.facebookUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs text-[#e0f2fe] transition-colors"
+              >
+                <svg className="w-3.5 h-3.5 text-[#7dd3fc] fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                </svg>
+                <span>Facebook CLB</span>
+              </a>
+            )}
+          </div>
 
           <p className="text-[#bae6fd]/60 text-xs mt-6">
             © {thanks.copyrightYear} {club.name} ({club.shortName}) • {club.university}
