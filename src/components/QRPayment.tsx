@@ -17,13 +17,10 @@ export const QRPayment: React.FC = () => {
   const { bank } = eventConfig;
   const [copiedField, setCopiedField] = useState<'account' | 'message' | null>(null);
   const [isQrZoomed, setIsQrZoomed] = useState(false);
-  const [useVietQrCode, setUseVietQrCode] = useState(false);
 
   const vietQrDynamicUrl = `https://img.vietqr.io/image/${bank.bankCode}-${bank.accountNumber}-compact2.png?amount=${
     bank.defaultAmount || ''
   }&addInfo=${encodeURIComponent(bank.transferMessage)}&accountName=${encodeURIComponent(bank.accountName)}`;
-
-  const currentQrImage = useVietQrCode ? vietQrDynamicUrl : bank.qrImage;
 
   const handleCopy = (text: string, field: 'account' | 'message') => {
     navigator.clipboard.writeText(text);
@@ -35,8 +32,10 @@ export const QRPayment: React.FC = () => {
 
   const handleDownloadQr = () => {
     const link = document.createElement('a');
-    link.href = currentQrImage;
-    link.download = `QR-Mung-Sinh-Nhat-${bank.accountNumber}.jpg`;
+    link.href = vietQrDynamicUrl;
+    link.download = `QR-Mung-Sinh-Nhat-${bank.accountNumber}.png`;
+    link.target = '_blank';
+    link.rel = 'noreferrer';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -84,11 +83,14 @@ export const QRPayment: React.FC = () => {
                 title="Nhấn để phóng to mã QR"
               >
                 <img
-                  src={currentQrImage}
+                  src={vietQrDynamicUrl}
                   alt="QR Chuyển khoản mừng sinh nhật"
                   className="w-full h-auto object-contain rounded-lg transition-transform duration-300 group-hover:scale-102"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = vietQrDynamicUrl;
+                    const img = e.target as HTMLImageElement;
+                    if (img.dataset.fallbackApplied) return;
+                    img.dataset.fallbackApplied = 'true';
+                    img.src = bank.qrImage;
                   }}
                 />
                 {/* Zoom overlay hint */}
@@ -97,27 +99,6 @@ export const QRPayment: React.FC = () => {
                     <Maximize2 className="w-3.5 h-3.5 text-[#0284c7]" /> Phóng to QR
                   </span>
                 </div>
-              </div>
-
-              {/* QR mode toggle */}
-              <div className="w-full flex items-center justify-center gap-2 mt-3 pt-2 border-t border-[#0284c7]/15 text-[11px] font-display">
-                <button
-                  onClick={() => setUseVietQrCode(false)}
-                  className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                    !useVietQrCode ? 'bg-[#0284c7] text-white font-bold' : 'text-[#0369a1] hover:bg-[#e0f2fe]'
-                  }`}
-                >
-                  Ảnh QR gốc
-                </button>
-                <span className="text-[#7dd3fc]">|</span>
-                <button
-                  onClick={() => setUseVietQrCode(true)}
-                  className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                    useVietQrCode ? 'bg-[#0284c7] text-white font-bold' : 'text-[#0369a1] hover:bg-[#e0f2fe]'
-                  }`}
-                >
-                  Mã QR tiêu chuẩn
-                </button>
               </div>
             </div>
 
@@ -266,7 +247,7 @@ export const QRPayment: React.FC = () => {
 
             <div className="bg-[#f0f9ff] p-3 rounded-2xl border border-[#7dd3fc]/50 max-w-[280px]">
               <img
-                src={currentQrImage}
+                src={vietQrDynamicUrl}
                 alt="QR Chuyển khoản phóng to"
                 className="w-full h-auto object-contain rounded-xl"
               />
