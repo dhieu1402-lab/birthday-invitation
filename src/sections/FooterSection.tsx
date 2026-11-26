@@ -95,11 +95,13 @@ export const FooterSection: React.FC = () => {
           <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
             {rsvp.contactHotline && (
               <a
-                href={`tel:${rsvp.contactHotline.replace(/[^\d+]/g, '')}`}
+                href={`https://zalo.me/${rsvp.contactHotline.replace(/[^\d]/g, '')}`}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs text-[#e0f2fe] transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-[#7dd3fc]" />
-                <span>Hotline: {rsvp.contactHotline}</span>
+                <span>Zalo / Hotline: {rsvp.contactHotline}</span>
               </a>
             )}
             {rsvp.contactEmail && (
