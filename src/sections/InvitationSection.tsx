@@ -38,9 +38,14 @@ export const InvitationSection: React.FC = () => {
           </div>
 
           {/* Institution & Club Name */}
-          <p className="text-[11px] sm:text-xs tracking-[0.14em] font-semibold text-[#0369a1]/85 uppercase">
-            {club.university} • {club.faculty}
-          </p>
+          <div className="space-y-0.5">
+            <p className="text-[11px] sm:text-xs tracking-[0.14em] font-semibold text-[#0369a1]/85 uppercase">
+              {club.university}
+            </p>
+            <p className="text-[11px] sm:text-xs tracking-[0.14em] font-semibold text-[#0369a1]/85 uppercase">
+              {club.faculty}
+            </p>
+          </div>
           <h3 className="text-sm sm:text-base tracking-[0.18em] font-bold text-[#0369a1] uppercase mt-1 mb-3 font-display">
             {club.name} ({club.shortName})
           </h3>

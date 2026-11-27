@@ -82,9 +82,10 @@ export const FooterSection: React.FC = () => {
           <h4 className="text-base sm:text-lg font-bold text-white tracking-wide font-display">
             {club.name} ({club.shortName})
           </h4>
-          <p className="text-xs text-[#bae6fd]/85 mt-1">
-            {club.faculty} • {club.university}
-          </p>
+          <div className="text-xs text-[#bae6fd]/85 mt-1 space-y-0.5">
+            <p>{club.faculty}</p>
+            <p>{club.university}</p>
+          </div>
           {club.slogan && club.slogan.trim() !== '' && (
             <p className="text-[11px] text-[#7dd3fc]/80 italic mt-1">
               Khẩu hiệu: “{club.slogan}”
@@ -128,8 +129,11 @@ export const FooterSection: React.FC = () => {
             )}
           </div>
 
-          <p className="text-[#bae6fd]/60 text-xs mt-6">
-            © {thanks.copyrightYear} {club.name} ({club.shortName}) • {club.university}
+          <p className="text-[#bae6fd]/60 text-xs mt-6 leading-relaxed">
+            © {thanks.copyrightYear} {club.name} ({club.shortName})
+            <span className="hidden sm:inline"> • </span>
+            <br className="sm:hidden" />
+            {club.university}
           </p>
         </div>
 
