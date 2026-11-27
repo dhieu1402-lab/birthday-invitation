@@ -158,11 +158,11 @@
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: none; }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.55s ease-out forwards;
+  animation: fadeIn 0.55s ease-out backwards;
 }
 
 /* 3D Envelope perspective */

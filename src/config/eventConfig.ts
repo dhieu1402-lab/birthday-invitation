@@ -222,7 +222,7 @@ export const eventConfig: EventConfig = {
   rsvp: {
     googleSheetWebhookUrl: "https://script.google.com/macros/s/AKfycbz5XW4Yhn_TqjnQyGX5yp1hnEGiXWbIguqjycQU39j4H1SM3H4sck9gjsaFR_zuF_pN/exec",
     googleFormDirectUrl: "",
-    contactHotline: "0986312435",
+    contactHotline: "0329169499",
     contactEmail: "clbkysukinhte@gmail.com",
     facebookUrl: "https://www.facebook.com/cem.eec?locale=vi_VN",
   },

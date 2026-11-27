@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Copy,
   Check,
@@ -229,49 +230,52 @@ export const QRPayment: React.FC = () => {
         </div>
       </RevealOnScroll>
 
-      {/* QR Zoom Modal */}
-      {isQrZoomed && (
-        <div
-          onClick={() => setIsQrZoomed(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#041f3d]/80 backdrop-blur-md animate-fade-in"
-        >
+      {/* QR Zoom Modal (Portal to body) */}
+      {isQrZoomed &&
+        typeof document !== 'undefined' &&
+        createPortal(
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-sm w-full bg-white border-2 border-[#7dd3fc] rounded-3xl p-6 text-center shadow-2xl flex flex-col items-center text-[#0c4a6e]"
+            onClick={() => setIsQrZoomed(false)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#041f3d]/80 backdrop-blur-md animate-fade-in"
           >
-            <button
-              onClick={() => setIsQrZoomed(false)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-[#e0f2fe] text-[#0284c7] hover:bg-[#bae6fd] transition-colors"
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-sm w-full bg-white border-2 border-[#7dd3fc] rounded-3xl p-6 text-center shadow-2xl flex flex-col items-center text-[#0c4a6e]"
             >
-              <X className="w-5 h-5" />
-            </button>
+              <button
+                onClick={() => setIsQrZoomed(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-[#e0f2fe] text-[#0284c7] hover:bg-[#bae6fd] transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
 
-            <span className="text-xs uppercase tracking-widest text-[#0284c7] font-bold font-display mb-3">
-              MÃ QR CHUYỂN KHOẢN
-            </span>
+              <span className="text-xs uppercase tracking-widest text-[#0284c7] font-bold font-display mb-3">
+                MÃ QR CHUYỂN KHOẢN
+              </span>
 
-            <div className="bg-[#f0f9ff] p-3 rounded-2xl border border-[#7dd3fc]/50 max-w-[280px]">
-              <img
-                src={vietQrDynamicUrl}
-                alt="QR Chuyển khoản phóng to"
-                className="w-full h-auto object-contain rounded-xl"
-              />
+              <div className="bg-[#f0f9ff] p-3 rounded-2xl border border-[#7dd3fc]/50 max-w-[280px]">
+                <img
+                  src={vietQrDynamicUrl}
+                  alt="QR Chuyển khoản phóng to"
+                  className="w-full h-auto object-contain rounded-xl"
+                />
+              </div>
+
+              <p className="text-[#0c4a6e] font-bold text-base mt-4 font-display">{bank.bankName}</p>
+              <p className="text-[#1f6fac] font-display tabular-nums text-lg font-bold mt-0.5">{bank.accountNumber}</p>
+              <p className="text-[#0369a1] text-xs font-semibold mt-1">{bank.accountName}</p>
+
+              <button
+                onClick={handleDownloadQr}
+                className="mt-5 w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold font-display sn2-btn-primary cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                TẢI ẢNH QR VỀ ĐIỆN THOẠI
+              </button>
             </div>
-
-            <p className="text-[#0c4a6e] font-bold text-base mt-4 font-display">{bank.bankName}</p>
-            <p className="text-[#1f6fac] font-display tabular-nums text-lg font-bold mt-0.5">{bank.accountNumber}</p>
-            <p className="text-[#0369a1] text-xs font-semibold mt-1">{bank.accountName}</p>
-
-            <button
-              onClick={handleDownloadQr}
-              className="mt-5 w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold font-display sn2-btn-primary cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              TẢI ẢNH QR VỀ ĐIỆN THOẠI
-            </button>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 };

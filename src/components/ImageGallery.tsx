@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Heart } from 'lucide-react';
 import { eventConfig } from '../config/eventConfig';
 import { RevealOnScroll } from './RevealOnScroll';
@@ -108,62 +109,65 @@ export const ImageGallery: React.FC = () => {
         ))}
       </div>
 
-      {/* Lightbox Modal */}
-      {selectedImageIndex !== null && (
-        <div
-          onClick={handleCloseModal}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#041f3d]/92 backdrop-blur-xl animate-fade-in"
-        >
-          <button
-            onClick={handleCloseModal}
-            aria-label="Đóng ảnh"
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-white/15 text-white hover:bg-[#0284c7] transition-all duration-200"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={handlePrev}
-            aria-label="Ảnh trước"
-            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/15 text-white hover:bg-[#0284c7] transition-all duration-200 backdrop-blur-md"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={handleNext}
-            aria-label="Ảnh sau"
-            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/15 text-white hover:bg-[#0284c7] transition-all duration-200 backdrop-blur-md"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
+      {/* Lightbox Modal (Portal to body so fixed positioning is always relative to viewport) */}
+      {selectedImageIndex !== null &&
+        typeof document !== 'undefined' &&
+        createPortal(
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl max-h-[90vh] w-full flex flex-col items-center justify-center"
+            onClick={handleCloseModal}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-[#041f3d]/92 backdrop-blur-xl animate-fade-in"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#7dd3fc]/40 bg-[#041f3d] max-h-[75vh]">
-              <img
-                src={memories[selectedImageIndex].url}
-                alt={memories[selectedImageIndex].title}
-                className="max-h-[75vh] w-auto max-w-full object-contain"
-              />
-            </div>
+            <button
+              onClick={handleCloseModal}
+              aria-label="Đóng ảnh"
+              className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-white/15 text-white hover:bg-[#0284c7] transition-all duration-200 cursor-pointer"
+            >
+              <X className="w-6 h-6" />
+            </button>
 
-            <div className="mt-4 text-center px-4 max-w-2xl">
-              <span className="text-xs uppercase tracking-widest text-[#7dd3fc] font-bold font-display">
-                Khoảnh khắc {selectedImageIndex + 1} / {memories.length}
-              </span>
-              <h3 className="text-lg sm:text-xl font-bold text-white mt-1 font-display">
-                {memories[selectedImageIndex].title}
-              </h3>
-              <p className="text-[#bae6fd] text-sm mt-1">
-                {memories[selectedImageIndex].caption}
-              </p>
+            <button
+              onClick={handlePrev}
+              aria-label="Ảnh trước"
+              className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/15 text-white hover:bg-[#0284c7] transition-all duration-200 backdrop-blur-md cursor-pointer"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={handleNext}
+              aria-label="Ảnh sau"
+              className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/15 text-white hover:bg-[#0284c7] transition-all duration-200 backdrop-blur-md cursor-pointer"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl max-h-[90vh] w-full flex flex-col items-center justify-center"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#7dd3fc]/40 bg-[#041f3d] max-h-[75vh]">
+                <img
+                  src={memories[selectedImageIndex].url}
+                  alt={memories[selectedImageIndex].title}
+                  className="max-h-[75vh] w-auto max-w-full object-contain"
+                />
+              </div>
+
+              <div className="mt-4 text-center px-4 max-w-2xl">
+                <span className="text-xs uppercase tracking-widest text-[#7dd3fc] font-bold font-display">
+                  Khoảnh khắc {selectedImageIndex + 1} / {memories.length}
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold text-white mt-1 font-display">
+                  {memories[selectedImageIndex].title}
+                </h3>
+                <p className="text-[#bae6fd] text-sm mt-1">
+                  {memories[selectedImageIndex].caption}
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 };
