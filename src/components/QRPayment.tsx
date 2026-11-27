@@ -25,7 +25,7 @@ export const QRPayment: React.FC = () => {
   if (bank.defaultAmount && bank.defaultAmount.trim() !== '') {
     qrParams.set('amount', bank.defaultAmount.trim());
   }
-  const vietQrDynamicUrl = `https://img.vietqr.io/image/${bank.bankCode}-${bank.accountNumber}-compact2.png?${qrParams.toString()}`;
+  const vietQrDynamicUrl = `https://img.vietqr.io/image/${bank.bankCode}-${bank.accountNumber}-compact.png?${qrParams.toString()}`;
 
   const handleCopy = (text: string, field: 'account' | 'message') => {
     navigator.clipboard.writeText(text);
