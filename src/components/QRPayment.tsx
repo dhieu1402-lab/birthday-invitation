@@ -18,9 +18,14 @@ export const QRPayment: React.FC = () => {
   const [copiedField, setCopiedField] = useState<'account' | 'message' | null>(null);
   const [isQrZoomed, setIsQrZoomed] = useState(false);
 
-  const vietQrDynamicUrl = `https://img.vietqr.io/image/${bank.bankCode}-${bank.accountNumber}-compact2.png?amount=${
-    bank.defaultAmount || ''
-  }&addInfo=${encodeURIComponent(bank.transferMessage)}&accountName=${encodeURIComponent(bank.accountName)}`;
+  const qrParams = new URLSearchParams({
+    addInfo: bank.transferMessage,
+    accountName: bank.accountName,
+  });
+  if (bank.defaultAmount && bank.defaultAmount.trim() !== '') {
+    qrParams.set('amount', bank.defaultAmount.trim());
+  }
+  const vietQrDynamicUrl = `https://img.vietqr.io/image/${bank.bankCode}-${bank.accountNumber}-compact2.png?${qrParams.toString()}`;
 
   const handleCopy = (text: string, field: 'account' | 'message') => {
     navigator.clipboard.writeText(text);
